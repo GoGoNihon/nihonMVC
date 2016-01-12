@@ -1,0 +1,23 @@
+﻿
+<form action="/account/Register" class="form" method="post" role="form" data-ajax>
+	@Html.AntiForgeryToken()
+	
+	<div class="form-group">
+		
+		<div class="col-xs-12 col-sm-4">
+			<input class="form-control" name="Email" type="email" value="" placeholder="email" required>
+		</div>
+		<div class="col-xs-12 col-sm-4">
+			<input class="form-control" name="Password" type="password" value="" placeholder="password" required>
+		</div>
+		<div class="col-xs-12 col-sm-4">
+			<input class="form-control" name="ConfirmPassword" type="password" value="" placeholder="confirm password" required>
+		</div>
+		<div class="col-xs-12 text-right">
+			<input type="submit" class="btn btn-default" value="add new user" />
+		</div>
+	</div>
+
+		
+
+	</form>

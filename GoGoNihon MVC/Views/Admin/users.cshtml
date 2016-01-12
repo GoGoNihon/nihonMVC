@@ -1,0 +1,105 @@
+﻿@using GoGoNihon_MVC.Models
+@using System.Linq
+@model GoGoNihon_MVC.Models.adminReturnData
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 admin-title"><h1>user management</h1></div>
+	</div>
+</div>
+
+<div class="container userAdmin">
+
+
+	@* edit users  *@
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title">users<span class="label label-default label-xs">gogo staff</span></h3>
+					<div class="icon">
+						<i class="icon icon-plus-circled"></i>
+					</div>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-xs-12">
+							<div data-userList></div>
+
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	@* add new user  *@
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title">users<span class="label label-default label-xs">add staff member</span></h3>
+					<div class="icon">
+						<i class="icon icon-plus-circled"></i>
+					</div>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-xs-12">
+							@{Html.RenderPartial("_Register");}
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	@* edit roles  *@
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title">users<span class="label label-default label-xs">roles</span></h3>
+					<div class="icon">
+						<i class="icon icon-plus-circled"></i>
+					</div>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-xs-12">
+							<ul class="role-list" data-roleList></ul>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12">
+							<form action="/api/addNewRole" class="form" method="post" role="form" data-ajax>
+								@Html.AntiForgeryToken()
+
+								<div class="form-group">
+
+									<div class="col-xs-8">
+										<input class="form-control" name="name" type="text" value="" placeholder="role name" required>
+									</div>
+									<div class="col-xs-4 text-right">
+										<input type="submit" class="btn btn-default" value="add role" />
+									</div>
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

@@ -1,0 +1,491 @@
+﻿<div class="container">
+	<div class="row">
+		<div class="col-xs-12 admin-title"><h1>course management</h1></div>
+	</div>
+</div>
+
+
+
+<div class="container">
+	
+
+
+	<div class="row">
+		<div class="form-group col-xs-12">
+			<div class="input-group">
+				<div class="input-group-addon black"><i class="icon icon-list"></i> select school</div>
+				<select type="text" class="form-control" data-schoolListCourse name="id" id="school-listCourse"></select>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="form-group col-xs-12">
+			<div class="input-group">
+				<div class="input-group-addon black"><i class="icon icon-list"></i> select course</div>
+				<select data-courseSelect class="form-control input-sm" name="courseID">
+					<option value="0">select course</option>
+					<option disabled>-----</option>
+				</select>
+				<span class="input-group-btn">
+					<button class="btn btn-info btn-sm" data-addNewCourse data-toggle="modal" data-target="#createCourseModal">add new</button>
+					<button class="btn btn-danger btn-sm" data-deleteCourse type="button">delete</button>
+				</span>
+			</div>
+		</div>
+	</div>
+
+
+	@*edit courses general *@
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title">course<span class="label label-default label-xs">general</span></h3>
+					<div class="icon">
+						<i class="icon icon-plus-circled"></i>
+					</div>
+				</div>
+				<div class="panel-body">
+					<form id="editCourseGeneral" class="form" method="post" action="" data-ajax>
+						
+						<div class="row">
+							<div class="form-group col-xs-6">
+								<label>name</label>
+								<input type="text" class="form-control input-sm" name="name" required>
+							</div>
+							<div class="form-group col-xs-6">
+								<label>type</label>
+								<select name="type" id="type" class="form-control">
+									<option value="0">general</option>
+									<option value="1">conversation</option>
+									<option value="2">business</option>
+								</select>
+							</div>
+							<div class="form-group col-xs-12">
+								<label>introduction</label>
+								<textarea data-wysiwyg name="editCourseIntroduction" id="editCourseIntroduction"></textarea>
+							</div>
+							<div class="form-group col-xs-12">
+								<label>image</label>
+								<input type="file" class="form-control input-sm" name="introductionImage" accept="image/x-png, image/gif, image/jpeg">
+							</div>
+							<div class="col-xs-12 image-holder ">
+								<span class="label label-default label-xs">image</span>
+								<div class="image introductionImage">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-xs-12 text-center">
+								<button type="submit" class="btn btn-default">save</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	@*edit courses lengths *@
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title">course<span class="label label-default label-xs">course length</span></h3>
+					<div class="icon">
+						<i class="icon icon-plus-circled"></i>
+					</div>
+				</div>
+				<div class="panel-body">
+					<form id="addCourseLength" class="form" method="post" action="" data-ajax>
+
+						<div class="row">
+							<div class="col-xs-12 form-group">
+								<div class="input-group">
+									<div class="input-group-addon black"><i class="icon icon-calendar"></i> course length is</div>
+									<input type="number" class="form-control input-sm" name="from" required>
+									<div class="input-group-addon black">months</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-xs-12 form-group">
+								<div class="input-group">
+									<div class="input-group-addon black">to</div>
+									<input type="number" class="form-control input-sm" name="to" required>
+									<div class="input-group-addon black">months</div>
+									<select class="form-control input-sm" name="withVisa">
+										<option value="false">without visa</option>
+										<option value="true">with visa</option>
+									</select>
+									<span class="input-group-btn">
+										<button type="submit" data-addCourseLength class="btn btn-info btn-sm">add</button>
+									</span>
+								</div>
+
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-xs-12 form-group">
+								<div class="input-group">
+									<div data-fillLengthsBox id="lengths-box"></div>
+								</div>
+
+							</div>
+						</div>
+						
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	@*edit schedule *@
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title">course<span class="label label-default label-xs">schedule</span></h3>
+					<div class="icon">
+						<i class="icon icon-plus-circled"></i>
+					</div>
+				</div>
+				<div class="panel-body">
+					<form id="editCourseSchedule" class="form" method="post" action="" data-ajax>
+
+						<div class="row">
+							<div class="form-group col-xs-12">
+								<label>hours per week</label>
+								<input type="number" class="form-control input-sm" name="hoursPerWeek" required>
+							</div>
+							<div class="form-group col-xs-12">
+								<label>schdule text</label>
+								<textarea data-wysiwyg name="scheduleText" id="scheduleText"></textarea>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-group col-xs-12 text-center">
+								<button type="submit" class="btn btn-default">save</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	@*edit terms *@
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title">course<span class="label label-default label-xs">terms</span></h3>
+					<div class="icon">
+						<i class="icon icon-plus-circled"></i>
+					</div>
+				</div>
+				<div class="panel-body">
+					<form id="formTermStarts" class="form" method="post" action="" data-ajax>
+						<div class="row">
+
+							<div class="form-group col-xs-12">
+								<label>term starts text</label>
+								<textarea data-wysiwyg name="termStarts" id="termStarts"></textarea>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-xs-12 text-center">
+								<button type="submit" class="btn btn-default btn-xs">update</button>
+							</div>
+						</div>
+					</form>
+					<form id="addTermStep" class="form" method="post" action="" data-ajax>
+						<div class="row">
+							<div class="form-group col-xs-12">
+								<label>term breakdown text</label>
+								<textarea data-wysiwyg name="addTermBody" id="addTermBody"></textarea>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-xs-12 text-center">
+								<button type="submit" class="btn btn-default btn-xs">add</button>
+							</div>
+						</div>
+					</form>
+					<form id="editTermSteps" class="form" method="post" action="" data-ajax>
+						<div id="stepsBox">
+
+						</div>
+						<div class="row">
+							<div class="form-group col-xs-12 text-center">
+								<button type="submit" data-updateStepOrder class="btn btn-default btn-xs">update</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	@*edit school features *@
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title">course<span class="label label-default label-xs">features</span></h3>
+					<div class="icon">
+						<i class="icon icon-plus-circled"></i>
+					</div>
+				</div>
+				<div class="panel-body">
+
+					<form id="editCourseFeatures" class="form" method="post" action="" data-ajax>
+
+						
+						<div class="form-group col-xs-12 col-sm-6">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="features.jlptClasses" value="true"> JLPT PREP ELECTIVE CLASSES
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="features.conversationClasses" value="true"> conversation classes
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="features.openClasses" value="true"> open classes
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="features.higherEducationPrep" value="true"> HIGHER EDUCATION PREP
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="features.businessClasses" value="true"> business classes
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="features.cultureClasses" value="true"> culture classes
+								</label>
+							</div>
+						</div>
+
+						<div class="form-group col-xs-12 col-sm-6">
+
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="features.kansaiStudies" value="true"> kansai studies
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="features.currentEventsClasses" value="true"> current events classes
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="features.movieClasses" value="true"> movie classes
+								</label>
+							</div>
+						</div>
+						<div class="form-group col-xs-12 text-center">
+							<button type="submit" class="btn btn-default">save</button>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	@*edit costs *@
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title">course<span class="label label-default label-xs">costs</span></h3>
+					<div class="icon">
+						<i class="icon icon-plus-circled"></i>
+					</div>
+				</div>
+				<div class="panel-body">
+					<form id="formEditCosts" class="form" method="post" action="" data-ajax>
+						<div class="row">
+							<div class="form-group col-xs-12">
+								<label>Costs text</label>
+								<textarea data-wysiwyg name="costsText" id="costsText"></textarea>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-xs-12 text-center">
+								<button type="submit" class="btn btn-default btn-xs">update</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	@*edit demographies *@
+
+	<div class="row demographics">
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title">course<span class="label label-default label-xs">demographics</span></h3>
+					<div class="icon">
+						<i class="icon icon-plus-circled"></i>
+					</div>
+				</div>
+				<div class="panel-body">
+					<form id="demographyImageForm" class="form" method="post" data-ajax>
+						<div class="row">
+							<div class="col-xs-12 form-group">
+								<div class="input-group">
+									<div class="input-group-addon black"><i class="icon icon-picture-o"></i> background image</div>
+									<input type="file" class="form-control input-sm" name="demographyImage" accept="image/x-png, image/gif, image/jpeg">
+									<span class="input-group-btn">
+										<button class="btn btn-info btn-sm" type="submit">update</button>
+									</span>
+								</div>
+							</div>
+							<div class="col-xs-12 image-holder form-group">
+								<span class="label label-default label-xs">image</span>
+								<div class="image demographyImage">
+								</div>
+							</div>
+						</div>
+					</form>
+					<form id="formAddDemography" class="form" method="post" action="" data-ajax>
+						
+						<div class="row">
+							<div class="form-group col-xs-12">
+								<div class="input-group">
+									<div class="input-group-addon black"><i class="icon icon-users"></i> add demography</div>
+									<div class="input-group-addon">name</div>
+									<input  class="form-control input-sm" name="name">
+									<div class="input-group-addon">percentage</div>
+									<input type="number" class="form-control input-sm" name="percent">
+									<span class="input-group-btn">
+										<button class="btn btn-info btn-sm" type="submit">add</button>
+									</span>
+								</div>
+							</div>
+						</div>
+					</form>
+					<div class="row">
+						<div class="col-xs-12"><hr /></div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12">
+							<div id="demoBox">
+								
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	@*end container*@
+</div>
+
+
+<div class="modal fade" id="createCourseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<form method="post" action="" data-ajax id="addCourseForm">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">enter new course</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="form-group col-xs-6">
+							<label>name</label>
+							<input type="text" class="form-control input-sm" name="name" required>
+						</div>
+						<div class="form-group col-xs-6">
+							<label>type</label>
+							<select name="type" id="type" class="form-control">
+								<option value="0">general</option>
+								<option value="1">conversation</option>
+								<option value="2">business</option>
+							</select>
+						</div>
+						<div class="form-group col-xs-12">
+							<label>introduction</label>
+							<textarea data-wysiwyg name="courseIntroduction" id="courseIntroduction"></textarea>
+						</div>
+						<div class="form-group col-xs-12">
+							<label>image</label>
+							<input type="file" class="form-control input-sm" name="introductionImage" accept="image/x-png, image/gif, image/jpeg">
+						</div>
+						<div class="col-xs-12 image-holder ">
+							<span class="label label-default label-xs">image</span>
+							<div class="image">
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">close</button>
+					<button type="submit" class="btn btn-primary btn-sm" data-btn-modal-save>save</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" id="editStepModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<form method="post" action="" data-ajax id="editStepForm">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">edit step</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="form-group col-xs-12">
+							<label>Breakdown Setp</label>
+							<textarea data-wysiwyg name="editTermBreakdownBody" id="editTermBreakdownBody"></textarea>
+						</div>
+						
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">close</button>
+					<button type="submit" class="btn btn-primary btn-sm" data-btn-modal-save>save</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

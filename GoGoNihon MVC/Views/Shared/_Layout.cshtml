@@ -1,0 +1,163 @@
+﻿@using Microsoft.AspNet.Identity;
+@model GoGoNihon_MVC.Models.pageReturnData
+
+@{
+
+	
+	var content = Model.page.content;
+	string languageCode = Model.languageCode;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go! Go! Nihon - @Model.page.name</title>
+    <meta name="description" content="The description of my page" />
+	@Styles.Render("~/Content/css")
+</head>
+<body>
+
+	<header>
+		<div class="modal fade" id="selectLanguageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">Select your language</h4>
+					</div>
+					<div class="modal-body">
+						<ul id="languageSelect">
+							<li><a data-language="en">English</a></li>
+							<li><a data-language="it">Italiano</a></li>
+							<li><a data-language="sv">Svenska</a></li>
+							<li><a data-language="es">Espanyol</a></li>
+							<li><a data-language="de">Deutsch</a></li>
+							<li><a data-language="jp">日本語</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="header-top" class="container">
+			<div class="row">
+				<div id="logo" class="col-xs-12 col-sm-6">
+					<a href="/@languageCode"><img class="img-responsive" src="~/Content/images/logo.svg" alt="Go! Go! Nihon" /></a>
+				</div>
+				<div class="col-xs-12 col-sm-6 hidden-xs" id="header-right">
+					<a href="#ContactForm" class="getInTouch-btn">
+						<div id="header-contact" >
+							<span class="icon icon-mail"></span>
+							<span class="text">
+								get in touch <br />
+								with us now
+							</span>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<nav class="navbar navbar-default">
+			<div class="container">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="/@languageCode/schools">courses</a></li>
+						<li><a href="/@languageCode/japan-apartments-rent-guesthouse-homestay">ACCOMMODATION</a></li>
+						<li><a href="https://www.facebook.com/gogonihonevents">events</a></li>
+						<li><a href="/@languageCode/careers-work-with-us">careers</a></li>
+						<li><a href="">wiki</a></li>
+						<li>
+							<div id="language-select">
+								<a data-langauge-select>
+									<span class="icon-globe"></span>
+									Language
+								</a>
+							</div>
+						</li>
+					</ul>
+
+				</div><!-- /.navbar-collapse -->
+			</div><!-- /.container-fluid -->
+		</nav>
+	</header>
+
+	<div class="body-content">
+		@RenderBody()
+	</div>
+	
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div id="footer-top">
+					<div id="footer-mail" class="col-xs-12 col-sm-6">
+						@Html.Raw(content.Where(c => c.name == "footer email").FirstOrDefault().contentCollection.FirstOrDefault().body)
+					</div>
+					<div id="footer-phone" class="col-xs-12 col-sm-6">
+						@Html.Raw(content.Where(c => c.name == "footer phone").FirstOrDefault().contentCollection.FirstOrDefault().body)
+					</div>
+				</div>
+				<div id="footer-mid" class="col-xs-12">
+					@Html.Raw(content.Where(c => c.name == "footer text").FirstOrDefault().contentCollection.FirstOrDefault().body)
+				</div>
+				<div id="footer-bot" class="col-xs-12">
+					@Html.Raw(content.Where(c => c.name == "footer terms").FirstOrDefault().contentCollection.FirstOrDefault().body)
+				</div>
+			</div>
+		</div>
+
+	</footer>
+	@{
+		if(HttpContext.Current.User.Identity.IsAuthenticated){
+
+		<div class="modal fade" id="editContentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<form class="form-inline" id="editContentBodyForm" action="/api/addContentBody/reloadPage" method="post" data-ajax>
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+						</div>
+						<div class="modal-body">
+							<div id="editContentBox">
+								<input type="hidden" name="contentBodyID" value="" />
+								<input type="hidden" name="contentID" value="" />
+								<input type="hidden" name="name" value="" />
+								<input type="hidden" name="code" value="" />
+								<input type="hidden" name="lastModifiedByID" value="@User.Identity.GetUserId()" />
+								<textarea id="pageContentEditor" data-wysiwyg class="form-control" name="body"></textarea>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary">Save and close</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		
+			@Scripts.Render("~/bundles/js-frontAdmin")
+		}else{
+			@Scripts.Render("~/bundles/js")
+		}
+
+		
+	}
+
+	@RenderSection("scripts", required: false)
+</body>
+</html>

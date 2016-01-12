@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "language";
+}
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 admin-title"><h1>language management</h1></div>
+	</div>
+</div>
+
+
+<div class="container langaugeAdmin">
+	@* add new language *@
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title">language<span class="label label-default label-xs">add language</span></h3>
+					<div class="icon">
+						<i class="icon icon-plus-circled"></i>
+					</div>
+				</div>
+				<div class="panel-body">
+					<form class="form" id="newLanguageForm" action="/api/addLanguage" method="post" data-ajax>
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="form-group">
+									<div class="input-group">
+										<div class="input-group-addon black"><i class="icon icon-flag"></i> add language</div>
+										<div class="input-group-addon">name</div>
+										<input class="form-control input-sm" name="name" id="languageName" required="" placeholder="name">
+										<div class="input-group-addon">code</div>
+										<input type="text" class="form-control input-sm" id="languageCode" name="code" placeholder="jp, en, de, it etc" required />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="input-group">
+										<div class="input-group-addon">flag</div>
+										<input type="file" class="form-control input-sm" id="flag" name="flag" required />
+										<span class="input-group-btn">
+											<button class="btn btn-info btn-sm" type="submit">add</button>
+										</span>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12">
+
+									
+
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	@* edit language *@
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title">language<span class="label label-default label-xs">edit language</span></h3>
+					<div class="icon">
+						<i class="icon icon-plus-circled"></i>
+					</div>
+				</div>
+				<div class="panel-body">
+					<form class="form" id="newLanguageForm" action="/api/editLanguage/getLanguageList" method="post" data-ajax>
+						<div class="row">
+							<div class="form-group col-xs-12">
+								<div class="input-group">
+									<div class="input-group-addon black"><i class="icon icon-flag"></i> select language</div>
+									<select name="languageID" id="languageSelect" class="form-control input-sm"></select>
+									<span class="input-group-btn">
+										<button type="submit" class="btn btn-info btn-sm">update</button>
+										<button class="btn btn-danger btn-sm" data-deletelanguage type="button">delete</button>
+									</span>
+								</div>
+							</div>
+							<div class="col-xs-12" id="languageInfo">
+								<div class="form-group">
+									<div class="input-group">
+										<div class="input-group-addon">name</div>
+										<input class="form-control input-sm" data-languageEditName name="name" id="editName" required="" placeholder="name">
+										<div class="input-group-addon">code</div>
+										<input type="text" class="form-control input-sm" data-languageEditCode name="code" id="editCode" placeholder="jp, en, de, it etc" required />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="input-group">
+										<div class="input-group-addon">flag</div>
+										<input type="file" data-languageEditFlag class="form-control input-sm" id="editFlag" name="flag" />
+
+									</div>
+								</div>
+								<div id="show-flag" class="text-center"></div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</div>
+

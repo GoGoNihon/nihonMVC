@@ -1,0 +1,151 @@
+﻿
+@model GoGoNihon_MVC.Models.Staff
+
+<section id="OurStaff">
+
+	<div class="container text-center">
+		<!-- OUR TEAM TITLE-->
+		<div class="OurTeam">
+			@if (Model.languageCode.Contains("it"))
+            {
+				<h3>IL NOSTRO TEAM</h3>
+            }
+            else if (Model.languageCode.Contains("se"))
+            {
+				<h3>VÅRT TEAM</h3>
+            }
+            else if (Model.languageCode.Contains("es"))
+            {
+				<h3>NUESTRO EQUIPO</h3>
+            }
+            else if (Model.languageCode.Contains("de"))
+            {
+				<h3>UNSER TEAM</h3>
+            }
+            else
+            {
+				<h3>OUR TEAM</h3>
+            }
+		</div>
+
+		<!-- SNOWFLAKES -->
+		<div class="row">
+			<!-- SNOWFLAKE LEFT-->
+			<div class="Staffbox">
+				<div>
+					<img src="~/Content/images/@Model.SnowflakeLeft.Imgurl" class="StaffFace img-circle" />
+				</div>
+				<div>
+					<img src="~/Content/images/@Model.SnowflakeLeft.Flag" class="StaffFlag" />
+				</div>
+				<div class="StaffName">
+					<strong>@Model.SnowflakeLeft.Name</strong>
+				</div>
+
+				<div class="StaffTitle">
+					@if (Model.languageCode.Contains("it"))
+					{
+						@Model.SnowflakeLeft.TitleIT;
+					}
+					else if (Model.languageCode.Contains("se"))
+					{
+						@Model.SnowflakeLeft.TitleSE;
+					}
+					else if (Model.languageCode.Contains("es"))
+					{
+						@Model.SnowflakeLeft.TitleES;
+					}
+					else if (Model.languageCode.Contains("de"))
+					{
+						@Model.SnowflakeLeft.TitleDE;
+					}
+					else
+					{
+						@Model.SnowflakeLeft.TitleEN;
+					}
+				</div>
+
+			</div>
+
+			<!-- SNOWFLAKE RIGHT-->
+			<div class="Staffbox">
+				<div>
+					<img src="~/Content/images/@Model.SnowflakeRight.Imgurl" class="StaffFace img-circle" />
+				</div>
+				<div>
+					<img src="~/Content/images/@Model.SnowflakeRight.Flag" class="StaffFlag" />
+				</div>
+				<div class="StaffName">
+					<strong>@Model.SnowflakeRight.Name</strong>
+				</div>
+
+				<div class="StaffTitle">
+					@if (Model.languageCode.Contains("it"))
+					{
+						@Model.SnowflakeRight.TitleIT;
+					}
+					else if (Model.languageCode.Contains("se"))
+					{
+						@Model.SnowflakeRight.TitleSE;
+					}
+					else if (Model.languageCode.Contains("es"))
+					{
+						@Model.SnowflakeRight.TitleES;
+					}
+					else if (Model.languageCode.Contains("de"))
+					{
+						@Model.SnowflakeRight.TitleDE;
+					}
+					else
+					{
+						@Model.SnowflakeRight.TitleEN;
+					}
+				</div>
+
+			</div>
+		</div>
+
+
+		<!-- EACH STAFF MEMBER, ORDER BY NAME -->
+		@foreach (GoGoNihon_MVC.Models.Staff.StaffMember s in Model.lstStaff)
+		{
+			<div class="Staffbox">
+				<div>
+					<img src="~/Content/images/@s.Imgurl" class="StaffFace img-circle" />
+				</div>
+				<div>
+					<img src="~/Content/images/@s.Flag" class="StaffFlag" />
+				</div>
+				<div class="StaffName">
+					<strong>@s.Name</strong>
+				</div>
+
+				<div class="StaffTitle">
+					@if (Model.languageCode.Contains("it"))
+					{
+						@s.TitleIT;
+					}
+					else if (Model.languageCode.Contains("se"))
+					{
+						@s.TitleSE;
+					}
+					else if (Model.languageCode.Contains("es"))
+					{
+						@s.TitleES;
+					}
+					else if (Model.languageCode.Contains("de"))
+					{
+						@s.TitleDE;
+					}
+					else
+					{
+						@s.TitleEN;
+					}
+				</div>
+
+			</div>
+		}
+
+	</div>
+
+</section>

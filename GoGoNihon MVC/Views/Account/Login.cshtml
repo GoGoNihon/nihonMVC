@@ -1,0 +1,41 @@
+﻿@using GoGoNihon_MVC.Models
+@model GoGoNihon_MVC.Models.adminReturnData
+
+<section id="loginForm" class="container">
+	<div class="row">
+		<form action="/account/Login" class="form-horizontal" method="post" role="form" data-ajax>
+			<input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+			@Html.AntiForgeryToken()
+			
+			<div class="form-group">
+				<label class="col-md-2 control-label" for="Email">Email</label>
+				<div class="col-md-10">
+					<input class="form-control" data-val="true" data-val-email="The Email field is not a valid e-mail address." data-val-required="The Email field is required." id="Email" name="Email" type="text" value="" />
+					<span class="field-validation-valid text-danger" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label" for="Password">Password</label>
+				<div class="col-md-10">
+					<input class="form-control" data-val="true" data-val-required="The Password field is required." id="Password" name="Password" type="password" />
+					<span class="field-validation-valid text-danger" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-md-offset-2 col-md-10">
+					<div class="checkbox">
+						<input data-val="true" data-val-required="The Remember me? field is required." id="RememberMe" name="RememberMe" type="checkbox" value="true" /><input name="RememberMe" type="hidden" value="false" />
+						<label for="RememberMe">Remember me?</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-md-offset-2 col-md-10">
+					<input type="submit" value="Log in" class="btn btn-default" />
+				</div>
+			</div>
+		</form>
+	</div>
+
+	
+</section>

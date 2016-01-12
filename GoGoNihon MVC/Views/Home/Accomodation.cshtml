@@ -1,0 +1,577 @@
+﻿@using GoGoNihon_MVC.Models;
+@using System.Linq;
+@using System.Data.Entity;
+@model GoGoNihon_MVC.Models.pageReturnData
+
+@{
+	ICollection<Content> content = Model.page.content;
+	ICollection<ImageGallery> galleries = Model.page.galleries;
+	ICollection<Faq> faqs = Model.page.faqs;
+}
+
+@{	ImageGallery gal = galleries.Where(g => g.id == 3).FirstOrDefault();
+	GalleryImage img = gal.galleryImages.Where(i => i.tag == "banner").FirstOrDefault();
+	ICollection<Content> galleryContent = img.content;
+	Content titleContent = galleryContent.Where(cn => cn.name == "title").FirstOrDefault();
+	String title = (titleContent.contentCollection.FirstOrDefault()).body;
+	Content textContent = galleryContent.Where(cn => cn.name == "text").FirstOrDefault();
+	String text = (textContent.contentCollection.FirstOrDefault()).body;
+	var flag = false;
+
+}
+
+
+<section class="feature-bg" id="accommodationBanner" style="background-image:url('@img.image');">
+	<div class="trans-black">
+		<div class="container">
+			<div class="row">
+				<div class="bannerText col-xs-12 text-center">
+					<h1>@Html.Raw(title)</h1>
+					@Html.Raw(text)
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+@{	Faq faq = faqs.Where(f => f.name == "123 faq").FirstOrDefault();
+
+	<section id="faq123" class="container">
+		@{int counter = 0; }
+		@foreach (FaqQuestion q in faq.questions)
+		{
+			Content qc = q.content.Where(c => c.name == "question").FirstOrDefault();
+			string question = qc.contentCollection.FirstOrDefault().body;
+			qc = q.content.Where(c => c.name == "answer").FirstOrDefault();
+			string answer = qc.contentCollection.FirstOrDefault().body;
+
+
+
+			<div class="col-sm-4 col-xs-12 text-center">
+
+				@{
+					string color = "";
+					counter++;
+					if (counter == 1)
+					{
+						color = "red";
+					}
+					if (counter == 2)
+					{
+						color = "yellow";
+					}
+					if (counter == 3)
+					{
+						color = "green";
+					}
+
+					<div class="colored-number @color">@counter</div>
+
+				}
+
+				@Html.Raw(question)
+				<br />
+				@Html.Raw(answer)
+			</div>
+					}
+	</section>
+}
+
+<section class="container">
+	<div class="row">
+		<div class="col-xs-12 text-center">
+			<div id="accommodationNote">
+				@{
+					@Html.Raw(content.Where(c => c.name == "accomodationNote").FirstOrDefault().contentCollection.FirstOrDefault().body)
+				}
+			</div>
+		</div>
+	</div>
+</section>
+<section class="container">
+	<div class="row width80" id="goodDeal">
+		@{
+			ImageGallery gallery = galleries.Where(g => g.id == 4).FirstOrDefault();
+			title = gallery.galleryImages.FirstOrDefault().content.Where(c => c.name == "title").FirstOrDefault().contentCollection.FirstOrDefault().body;
+			counter = 0;
+
+			foreach (GalleryImage gi in gallery.galleryImages)
+			{
+				counter++;
+				<div class="row">
+					<div class="col-md-4 col-sm-4 hidden-xs">
+						<img src="@gi.image" class="img-circle img-responsive" />
+					</div>
+					<div class="col-md-8 col-sm-8 col-xs-12">
+
+						@{if (counter == 1)
+							{
+								<h3>@Html.Raw(title)</h3>
+							}
+						}
+						@Html.Raw(gi.content.Where(c => c.name == "text").FirstOrDefault().contentCollection.FirstOrDefault().body)
+
+					</div>
+				</div>
+							}
+		}
+	</div>
+</section>
+
+@{	gal = galleries.Where(g => g.id == 3).FirstOrDefault();
+	img = gal.galleryImages.Where(i => i.tag == "sharehouse").FirstOrDefault();
+	title = img.content.Where(c => c.name == "title").FirstOrDefault().contentCollection.FirstOrDefault().body;
+	text = img.content.Where(c => c.name == "text").FirstOrDefault().contentCollection.FirstOrDefault().body;
+
+}
+
+<section class="feature-bg" style="background-image:url('@img.image');">
+	<div class="trans-black">
+		<div class="container">
+			<div class="row">
+				<div class="bannerText col-xs-12 text-center">
+					<h1>@Html.Raw(title)</h1>
+					@Html.Raw(text)
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+@{	faq = faqs.Where(f => f.name == "share house").FirstOrDefault();
+	counter = 0;
+}
+<section id="shareHouseFaq">
+	<div class="container ">
+
+		@foreach (FaqQuestion q in faq.questions)
+		{
+			counter++;
+			counter = 0;
+			flag = false;
+		}
+
+		@foreach (FaqQuestion q in faq.questions)
+		{
+			counter++;
+			if ((counter % 2) != 0)
+			{
+				flag = true;
+				@:<div class="row width80">
+			}
+
+			<div class="col-xs-12 col-sm-6">
+				<h4>@Html.Raw(q.content.Where(c => c.name == "question").FirstOrDefault().contentCollection.FirstOrDefault().body)</h4>
+				<br />
+				@Html.Raw(q.content.Where(c => c.name == "answer").FirstOrDefault().contentCollection.FirstOrDefault().body)
+			</div>
+
+			if ((counter % 2) == 0 || (flag && (counter == faq.questions.Count)))
+			{
+				@:</div>
+				flag = false;
+			}
+
+		}
+
+	</div>
+</section>
+
+@{	gal = galleries.Where(g => g.id == 3).FirstOrDefault();
+	img = gal.galleryImages.Where(i => i.tag == "apartment").FirstOrDefault();
+	title = img.content.Where(c => c.name == "title").FirstOrDefault().contentCollection.FirstOrDefault().body;
+	text = img.content.Where(c => c.name == "text").FirstOrDefault().contentCollection.FirstOrDefault().body;
+
+}
+
+<section class="feature-bg" style="background-image:url('@img.image');">
+	<div class="trans-black">
+		<div class="container">
+			<div class="row">
+				<div class="bannerText col-xs-12 text-center">
+					<h1>@Html.Raw(title)</h1>
+					@Html.Raw(text)
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+<section id="apartmentFaq">
+	<div class="container">
+		@{	faq = faqs.Where(f => f.name == "apartment").FirstOrDefault();
+			counter = 0;
+			flag = false;
+		}
+
+		@foreach (FaqQuestion q in faq.questions)
+		{
+			counter++;
+			if ((counter % 2) != 0)
+			{
+				flag = true;
+				@:<div class="row width80">
+			}
+
+			<div class="col-xs-12 col-sm-6">
+				<h4>@Html.Raw(q.content.Where(c => c.name == "question").FirstOrDefault().contentCollection.FirstOrDefault().body)</h4>
+				<br />
+				@Html.Raw(q.content.Where(c => c.name == "answer").FirstOrDefault().contentCollection.FirstOrDefault().body)
+			</div>
+
+			if ((counter % 2) == 0 || (flag && (counter == faq.questions.Count)))
+			{
+				@:</div>
+				flag = false;
+			}
+
+		}
+
+	</div>
+</section>
+
+@{	gal = galleries.Where(g => g.id == 3).FirstOrDefault();
+	img = gal.galleryImages.Where(i => i.tag == "hostfamily").FirstOrDefault();
+	title = img.content.Where(c => c.name == "title").FirstOrDefault().contentCollection.FirstOrDefault().body;
+	text = img.content.Where(c => c.name == "text").FirstOrDefault().contentCollection.FirstOrDefault().body;
+}
+<section class="feature-bg" style="background-image:url('@img.image');">
+	<div class="trans-black">
+		<div class="container">
+			<div class="row">
+				<div class="bannerText col-xs-12 text-center">
+					<h1>@Html.Raw(title)</h1>
+					@Html.Raw(text)
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="hostFamilyFaq">
+	<div class="container">
+		@{	faq = faqs.Where(f => f.name == "host family").FirstOrDefault();
+			counter = 0;
+			flag = false;
+		}
+
+		@foreach (FaqQuestion q in faq.questions)
+		{
+			counter++;
+			if ((counter % 2) != 0)
+			{
+				flag = true;
+				@:<div class="row width80">
+			}
+
+			<div class="col-xs-12 col-sm-6">
+				<h4>@Html.Raw(q.content.Where(c => c.name == "question").FirstOrDefault().contentCollection.FirstOrDefault().body)</h4>
+				<br />
+				@Html.Raw(q.content.Where(c => c.name == "answer").FirstOrDefault().contentCollection.FirstOrDefault().body)
+			</div>
+
+			if ((counter % 2) == 0 || (flag && (counter == faq.questions.Count)))
+			{
+				@:</div>
+				flag = false;
+			}
+
+		}
+
+	</div>
+</section>
+
+@{	gal = galleries.Where(g => g.id == 3).FirstOrDefault();
+	img = gal.galleryImages.Where(i => i.tag == "tokyo").FirstOrDefault();
+	title = img.content.Where(c => c.name == "title").FirstOrDefault().contentCollection.FirstOrDefault().body;
+	text = img.content.Where(c => c.name == "text").FirstOrDefault().contentCollection.FirstOrDefault().body;
+}
+<section class="feature-bg" style="background-image:url('@img.image');">
+	<div class="trans-black">
+		<div class="container">
+			<div class="row">
+				<div class="bannerText col-xs-12 text-center">
+					<h1>@Html.Raw(title)</h1>
+					@Html.Raw(text)
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="container tokyo accomodationTables">
+	<div class="row sharehouse">
+		<div class="col-xs-12 text-center heading">
+			<i class="icon icon-home"></i><br />
+			<h3>share house</h3>
+		</div>
+		<div class="col-xs-12 ">
+			@Html.Raw(content.Where(c => c.name == "tokyo share house").FirstOrDefault().contentCollection.FirstOrDefault().body)
+		</div>
+	</div>
+	<div class="row hostFamily">
+		<div class="col-xs-12 text-center heading">
+			<i class="icon icon-users"></i><br />
+			<h3>host family</h3>
+		</div>
+		<div class="col-xs-12 ">
+			@Html.Raw(content.Where(c => c.name == "tokyo host family").FirstOrDefault().contentCollection.FirstOrDefault().body)
+		</div>
+	</div>
+	<div class="row apartment">
+		<div class="col-xs-12 text-center heading">
+			<i class="icon icon-building"></i><br />
+			<h3>apartment</h3>
+		</div>
+		<div class="col-xs-12 ">
+			@Html.Raw(content.Where(c => c.name == "tokyo apartment").FirstOrDefault().contentCollection.FirstOrDefault().body)
+		</div>
+	</div>
+	<div class="row dorm">
+		<div class="col-xs-12 text-center heading">
+			<i class="icon icon-building"></i><br />
+			<h3>DORMITORY</h3>
+		</div>
+		<div class="col-xs-12 ">
+			@Html.Raw(content.Where(c => c.name == "tokyo dorm").FirstOrDefault().contentCollection.FirstOrDefault().body)
+		</div>
+	</div>
+</section>
+
+@{	gal = galleries.Where(g => g.id == 3).FirstOrDefault();
+	img = gal.galleryImages.Where(i => i.tag == "osaka").FirstOrDefault();
+	title = img.content.Where(c => c.name == "title").FirstOrDefault().contentCollection.FirstOrDefault().body;
+	text = img.content.Where(c => c.name == "text").FirstOrDefault().contentCollection.FirstOrDefault().body;
+}
+<section class="feature-bg" style="background-image:url('@img.image');">
+	<div class="trans-black">
+		<div class="container">
+			<div class="row">
+				<div class="bannerText col-xs-12 text-center">
+					<h1>@Html.Raw(title)</h1>
+					@Html.Raw(text)
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="container osaka accomodationTables">
+	<div class="row sharehouse">
+		<div class="col-xs-12 text-center heading">
+			<i class="icon icon-home"></i><br />
+			<h3>share house</h3>
+		</div>
+		<div class="col-xs-12 ">
+			@Html.Raw(content.Where(c => c.name == "osaka share house").FirstOrDefault().contentCollection.FirstOrDefault().body)
+		</div>
+	</div>
+	<div class="row hostFamily">
+		<div class="col-xs-12 text-center heading">
+			<i class="icon icon-users"></i><br />
+			<h3>host family</h3>
+		</div>
+		<div class="col-xs-12 ">
+			@Html.Raw(content.Where(c => c.name == "osaka host family").FirstOrDefault().contentCollection.FirstOrDefault().body)
+		</div>
+	</div>
+	<div class="row apartment">
+		<div class="col-xs-12 text-center heading">
+			<i class="icon icon-building"></i><br />
+			<h3>apartment</h3>
+		</div>
+		<div class="col-xs-12 ">
+			@Html.Raw(content.Where(c => c.name == "osaka apartment").FirstOrDefault().contentCollection.FirstOrDefault().body)
+		</div>
+	</div>
+	<div class="row dorm">
+		<div class="col-xs-12 text-center heading">
+			<i class="icon icon-building"></i><br />
+			<h3>DORMITORY</h3>
+		</div>
+		<div class="col-xs-12 ">
+			@Html.Raw(content.Where(c => c.name == "osaka dorm").FirstOrDefault().contentCollection.FirstOrDefault().body)
+		</div>
+	</div>
+</section>
+
+@{	gal = galleries.Where(g => g.id == 3).FirstOrDefault();
+	img = gal.galleryImages.Where(i => i.tag == "yokohama").FirstOrDefault();
+	title = img.content.Where(c => c.name == "title").FirstOrDefault().contentCollection.FirstOrDefault().body;
+	text = img.content.Where(c => c.name == "text").FirstOrDefault().contentCollection.FirstOrDefault().body;
+}
+<section class="feature-bg" style="background-image:url('@img.image');">
+	<div class="trans-black">
+		<div class="container">
+			<div class="row">
+				<div class="bannerText col-xs-12 text-center">
+					<h1>@Html.Raw(title)</h1>
+					@Html.Raw(text)
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="container yokohama accomodationTables">
+	<div class="row sharehouse">
+		<div class="col-xs-12 text-center heading">
+			<i class="icon icon-home"></i><br />
+			<h3>share house</h3>
+		</div>
+		<div class="col-xs-12 ">
+			@Html.Raw(content.Where(c => c.name == "yokohama share house").FirstOrDefault().contentCollection.FirstOrDefault().body)
+		</div>
+	</div>
+	<div class="row hostFamily">
+		<div class="col-xs-12 text-center heading">
+			<i class="icon icon-users"></i><br />
+			<h3>host family</h3>
+		</div>
+		<div class="col-xs-12 ">
+			@Html.Raw(content.Where(c => c.name == "yokohama host family").FirstOrDefault().contentCollection.FirstOrDefault().body)
+		</div>
+	</div>
+	<div class="row dorm">
+		<div class="col-xs-12 text-center heading">
+			<i class="icon icon-building"></i><br />
+			<h3>DORMITORY</h3>
+		</div>
+		<div class="col-xs-12 ">
+			@Html.Raw(content.Where(c => c.name == "yokohama dorm").FirstOrDefault().contentCollection.FirstOrDefault().body)
+		</div>
+	</div>
+</section>
+
+@{	gal = galleries.Where(g => g.id == 3).FirstOrDefault();
+	img = gal.galleryImages.Where(i => i.tag == "kyoto").FirstOrDefault();
+	title = img.content.Where(c => c.name == "title").FirstOrDefault().contentCollection.FirstOrDefault().body;
+	text = img.content.Where(c => c.name == "text").FirstOrDefault().contentCollection.FirstOrDefault().body;
+}
+<section class="feature-bg" style="background-image:url('@img.image');">
+	<div class="trans-black">
+		<div class="container">
+			<div class="row">
+				<div class="bannerText col-xs-12 text-center">
+					<h1>@Html.Raw(title)</h1>
+					@Html.Raw(text)
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="container kyoto accomodationTables">
+	<div class="row sharehouse">
+		<div class="col-xs-12 text-center heading">
+			<i class="icon icon-home"></i><br />
+			<h3>share house</h3>
+		</div>
+		<div class="col-xs-12 ">
+			@Html.Raw(content.Where(c => c.name == "kyoto share house").FirstOrDefault().contentCollection.FirstOrDefault().body)
+		</div>
+	</div>
+	<div class="row hostFamily">
+		<div class="col-xs-12 text-center heading">
+			<i class="icon icon-users"></i><br />
+			<h3>host family</h3>
+		</div>
+		<div class="col-xs-12 ">
+			@Html.Raw(content.Where(c => c.name == "kyoto host family").FirstOrDefault().contentCollection.FirstOrDefault().body)
+		</div>
+	</div>
+	<div class="row apartment">
+		<div class="col-xs-12 text-center heading">
+			<i class="icon icon-building"></i><br />
+			<h3>apartment</h3>
+		</div>
+		<div class="col-xs-12 ">
+			@Html.Raw(content.Where(c => c.name == "kyoto apartment").FirstOrDefault().contentCollection.FirstOrDefault().body)
+		</div>
+	</div>
+</section>
+
+@{	gal = galleries.Where(g => g.id == 3).FirstOrDefault();
+	img = gal.galleryImages.Where(i => i.tag == "fukuoka").FirstOrDefault();
+	title = img.content.Where(c => c.name == "title").FirstOrDefault().contentCollection.FirstOrDefault().body;
+	text = img.content.Where(c => c.name == "text").FirstOrDefault().contentCollection.FirstOrDefault().body;
+}
+<section class="feature-bg" style="background-image:url('@img.image');">
+	<div class="trans-black">
+		<div class="container">
+			<div class="row">
+				<div class="bannerText col-xs-12 text-center">
+					<h1>@Html.Raw(title)</h1>
+					@Html.Raw(text)
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="container fukuoka accomodationTables">
+	<div class="row dorm">
+		<div class="col-xs-12 text-center heading">
+			<i class="icon icon-building"></i><br />
+			<h3>DORMITORY</h3>
+		</div>
+		<div class="col-xs-12 ">
+			@Html.Raw(content.Where(c => c.name == "fukuoka dorm").FirstOrDefault().contentCollection.FirstOrDefault().body)
+		</div>
+	</div>
+</section>
+
+
+@{	gal = galleries.Where(g => g.id == 3).FirstOrDefault();
+	img = gal.galleryImages.Where(i => i.tag == "faq").FirstOrDefault();
+	title = img.content.Where(c => c.name == "title").FirstOrDefault().contentCollection.FirstOrDefault().body;
+	text = img.content.Where(c => c.name == "text").FirstOrDefault().contentCollection.FirstOrDefault().body;
+}
+<section class="feature-bg" style="background-image:url('@img.image');">
+	<div class="trans-black">
+		<div class="container">
+			<div class="row">
+				<div class="bannerText col-xs-12 text-center">
+					<h1>@Html.Raw(title)</h1>
+					@Html.Raw(text)
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="faq">
+	<div class="container">
+		@{	faq = faqs.Where(f => f.name == "faq").FirstOrDefault();
+			counter = 0;
+			flag = false;
+		}
+
+		@foreach (FaqQuestion q in faq.questions)
+		{
+			counter++;
+			if ((counter % 2) != 0)
+			{
+				flag = true;
+				@:<div class="row width80">
+			}
+
+			<div class="col-xs-12 col-sm-6">
+				<h4>@Html.Raw(q.content.Where(c => c.name == "question").FirstOrDefault().contentCollection.FirstOrDefault().body)</h4>
+				<br />
+				@Html.Raw(q.content.Where(c => c.name == "answer").FirstOrDefault().contentCollection.FirstOrDefault().body)
+			</div>
+
+			if ((counter % 2) == 0 || (flag && (counter == faq.questions.Count)))
+			{
+				@:</div>
+				flag = false;
+			}
+
+		}
+
+	</div>
+</section>

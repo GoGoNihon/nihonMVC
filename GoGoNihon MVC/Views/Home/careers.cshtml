@@ -1,0 +1,236 @@
+﻿@using GoGoNihon_MVC.Models;
+@using System.Linq;
+@using System.Data.Entity;
+@model pageReturnData
+
+@{
+	ICollection<Content> content = Model.page.content;
+	ICollection<ImageGallery> galleries = Model.page.galleries;
+	ICollection<Faq> faqs = Model.page.faqs;
+}
+
+@{	ImageGallery gal = galleries.Where(g => g.id == 4061).FirstOrDefault();
+	GalleryImage img = gal.galleryImages.Where(i => i.tag == "banner").FirstOrDefault();
+	ICollection<Content> galleryContent = img.content;
+	Content titleContent = galleryContent.Where(cn => cn.name == "title").FirstOrDefault();
+	String title = (titleContent.contentCollection.FirstOrDefault()).body;
+	Content textContent = galleryContent.Where(cn => cn.name == "text").FirstOrDefault();
+	String text = (textContent.contentCollection.FirstOrDefault()).body;
+
+
+}
+
+<section class="feature-bg" id="careersBanner" style="background-image:url('@img.image');">
+	<div class="trans-black">
+		<div class="container">
+			<div class="row">
+				<div class="bannerText col-xs-12 text-center">
+					<h1>@Html.Raw(title)</h1>
+					@Html.Raw(text)
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="jobsBox" class="container">
+	<div id="jobs" class="row">
+		<div class="job">
+			<div class="img"><i class="icon icon-language"></i></div>
+			<div class="title">SWEDISH STUDENT COORDINATOR</div>
+			<div class="detail">
+				<h3>SWEDISH STUDENT COORDINATOR</h3>
+				We’re looking for a candidate with a very positive attitude, strong written communication skills, the ability to troubleshoot a student’s problems with a
+				strong willingness to help people, also keeping high attention to detail.
+				<br /><br />
+				You will be working closely with our international team, learning our current process of helping students and providing guidance to students via e-mail and Skype.
+				<br /><br />
+				The position is part-time at our office in Higashi-Shinjuku in Tokyo.
+				<br /><br />
+
+				<ol class="requirements">
+					<li><span>You need to be a native Swedish speaker.</span> </li>
+					<li><span>Be highly organized and able to meet strict deadlines and quotas.</span> </li>
+					<li><span>Currently located in Tokyo with 1+ years remaining on a long-term visa.</span> </li>
+					<li><span>Perfect written Swedish communication skills with an attention to detail.</span> </li>
+					<li><span>Have at least 1 year of customer support experience.</span> </li>
+					<li><span>Fluent in spoken and written English in order to communicate with our team. Bonus points for Japanese proficiency, but not a requirement.</span> </li>
+				</ol>
+				<div class="text-center apply-link"><a class="btn btn-blue" href="https://gogonihon.wufoo.com/forms/zo9t7m614e6bzy/">apply now</a></div>
+				
+			</div>
+		</div>
+		<div class="job">
+			<div class="img"><i class="icon icon-language"></i></div>
+			<div class="title">FRENCH STUDENT COORDINATOR</div>
+			<div class="detail">
+				<h3>FRENCH STUDENT COORDINATOR</h3>
+				We’re looking for a candidate with a very positive attitude, strong written communication skills, the ability to troubleshoot a student’s problems with a
+				strong willingness to help people, also keeping high attention to detail.
+				<br /><br />
+				You will be working closely with our international team, learning our current process of helping students and providing guidance to students via e-mail and Skype.
+				<br /><br />
+				The position is part-time at our office in Higashi-Shinjuku in Tokyo.
+				<br /><br />
+
+				<ol class="requirements">
+					<li><span>You need to be a native French speaker.</span> </li>
+					<li><span>Perfect written French communication skills with an attention to detail.</span> </li>
+					<li><span>Be highly organized and able to meet strict deadlines and quotas.</span> </li>
+					<li><span>Have at least 1 year of customer support experience.</span> </li>
+					<li><span>Currently located in Tokyo with 1+ years remaining on a long-term visa.</span> </li>
+					<li><span>Fluent in spoken and written English in order to communicate with our team. Bonus points for Japanese proficiency, but not a requirement.</span> </li>
+				</ol>
+
+				<div class="text-center apply-link"><a class="btn btn-blue" href="https://gogonihon.wufoo.com/forms/zo9t7m614e6bzy/">apply now</a></div>
+			</div>
+		</div>
+		<div class="job">
+			<div class="img"><i class="icon icon-language"></i></div>
+			<div class="title">GERMAN STUDENT COORDINATOR</div>
+			<div class="detail">
+				<h3>GERMAN STUDENT COORDINATOR</h3>
+				We’re looking for a candidate with a very positive attitude, strong written communication skills, the ability to troubleshoot a student’s problems with a
+				strong willingness to help people, also keeping high attention to detail.
+				<br /><br />
+				You will be working closely with our international team, learning our current process of helping students and providing guidance to students via e-mail and Skype.
+				<br /><br />
+				The position is part-time at our office in Higashi-Shinjuku in Tokyo.
+				<br /><br />
+
+				<ol class="requirements">
+					<li><span>You need to be a native German speaker.</span> </li>
+					<li><span>Perfect written German communication skills with an attention to detail.</span> </li>
+					<li><span>Be highly organized and able to meet strict deadlines and quotas.</span> </li>
+					<li><span>Have at least 1 year of customer support experience.</span> </li>
+					<li><span>Currently located in Tokyo with 1+ years remaining on a long-term visa.</span> </li>
+					<li><span>Fluent in spoken and written English in order to communicate with our team. Bonus points for Japanese proficiency, but not a requirement.</span> </li>
+				</ol>
+
+				<div class="text-center apply-link"><a class="btn btn-blue" href="https://gogonihon.wufoo.com/forms/zo9t7m614e6bzy/">apply now</a></div>
+			</div>
+		</div>
+		<div class="job">
+			<div class="img"><i class="icon icon-language"></i></div>
+			<div class="title">spanish STUDENT COORDINATOR</div>
+			<div class="detail">
+				<h3>spanish STUDENT COORDINATOR</h3>
+				We’re looking for a candidate with a very positive attitude, strong written communication skills, the ability to troubleshoot a student’s problems with a
+				strong willingness to help people, also keeping high attention to detail.
+				<br /><br />
+				You will be working closely with our international team, learning our current process of helping students and providing guidance to students via e-mail and Skype.
+				<br /><br />
+				The position is part-time at our office in Higashi-Shinjuku in Tokyo.
+				<br /><br />
+
+				<ol class="requirements">
+					<li><span>You need to be a native Spanish speaker.</span> </li>
+					<li><span>Perfect written Spanish communication skills with an attention to detail.</span> </li>
+					<li><span>Be highly organized and able to meet strict deadlines and quotas.</span> </li>
+					<li><span>Be highly organized and able to meet strict deadlines and quotas.</span> </li>
+					<li><span>Currently located in Tokyo with 1+ years remaining on a long-term visa.</span> </li>
+					<li><span>Fluent in spoken and written English in order to communicate with our team. Bonus points for Japanese proficiency, but not a requirement.</span> </li>
+				</ol>
+
+				<div class="text-center apply-link"><a class="btn btn-blue" href="https://gogonihon.wufoo.com/forms/zo9t7m614e6bzy/">apply now</a></div>
+			</div>
+		</div>
+		<div class="job">
+			<div class="img"><i class="icon icon-cart-arrow-down"></i></div>
+			<div class="title">DIGITAL MARKETING SPECIALIST</div>
+			<div class="detail">
+				<h3>DIGITAL MARKETING SPECIALIST</h3>
+				We're seeking an intelligent and creative individual to lead our online marketing operations. This individual will join a high-growth, technologically-driven education
+				company and, as a member of its tightly-knit marketing team, you play a key role in shaping the future of this company’s marketing efforts. If you are able to own and
+				lead multiple key initiatives independently, have an analytical/data-driven mindset, are a creative problem solver, and take pride in deploying high quality marketing
+				efforts, then we encourage you to learn more about joining our team.
+				<br /><br />
+				You will be managing the continuous improvement of our paid search, content network, and remarketing campaigns across a variety of advertising platforms, including Adwords,
+				Bing Ads, and Facebook.
+				<br /><br />
+				Also, you'll work with outside design partners and our in-house tech team to continuously improve our onsite conversion rates, continuously optimizing our websites
+				to increase both paid and organic leads and provide advice and input regarding the search implications of website updates/revamps. Work with sales-team counterparts to
+				assess and improve our lead conversion efforts. Work with teammates to design, build, and launch new marketing campaigns and initiatives to identify productive new
+				marketing channels.
+				<br /><br />
+				The position is full-time at our office in Higashi-Shinjuku in Tokyo.
+				<br /><br />
+
+				<ol class="requirements">
+					<li><span>A person with a strong intellect and a Bachelor's Degree (in Marketing preferred).</span> </li>
+					<li><span>A data-driven, analytical approach to problem solving.</span> </li>
+					<li><span>At least 2-5 years of search engine marketing experience.</span> </li>
+					<li><span>A working knowledge of HTML.</span> </li>
+					<li><span>An exceptional work ethic and attention to detail.</span></li>
+					<li><span>Solid experience managing paid search and other online advertising campaigns, preferably in environments that are highly data-driven.</span> </li>
+					<li><span>Up-to-date knowledge and expertise in using digital/web tools and techniques, including web analytic tools like Google Analytics.</span> </li>
+					<li><span>Exceptional analytical and reporting skills, and a thorough knowledge of Excel.</span> </li>
+					<li><span>A successful track record of improving revenue and profits through onsite optimisation efforts.</span> </li>
+					<li><span>A thorough knowledge of current best practices and trends in both SEO and SEM, and an ability to learn and adapt as those industries evolve.</span> </li>
+					<li><span>Native level of english.</span> </li>
+					<li><span>Study abroad experience is preferred, but not required.</span> </li>
+					<li><span>Other language ability is preferred but not required.</span> </li>
+				</ol>
+
+				<div class="text-center apply-link"><a class="btn btn-blue" href="https://gogonihon.wufoo.com/forms/zo9t7m614e6bzy/">apply now</a></div>
+			</div>
+		</div>
+		<div class="job">
+			<div class="img"><i class="icon icon-globe"></i></div>
+			<div class="title">INTERNATIONAL STUDENT COORDINATOR</div>
+			<div class="detail">
+				<h3>INTERNATIONAL STUDENT COORDINATOR</h3>
+				We’re looking for a candidate with a very positive attitude, strong written communication skills, the ability to troubleshoot a student’s problems with a
+				strong willingness to help people, also keeping high attention to detail.
+				<br /><br />
+				You will be working closely with our international team, learning our current process of helping students and providing guidance to students via e-mail and Skype.
+				<br /><br />
+				The position is part-time at our office in Higashi-Shinjuku in Tokyo.
+				<br /><br />
+
+				<ol class="requirements">
+					<li><span>You need to be a native English speaker.</span> </li>
+					<li><span>Perfect written English communication skills with an attention to detail.</span> </li>
+					<li><span>Be highly organized and able to meet strict deadlines and quotas.</span> </li>
+					<li><span>Have at least 1 year of customer support experience.</span> </li>
+					<li><span>Currently located in Tokyo with 1+ years remaining on a long-term visa.</span> </li>
+					<li><span>Fluent in spoken and written English in order to communicate with our team. Bonus points for Japanese proficiency, but not a requirement.</span> </li>
+				</ol>
+
+				<div class="text-center apply-link"><a class="btn btn-blue" href="https://gogonihon.wufoo.com/forms/zo9t7m614e6bzy/">apply now</a></div>
+			</div>
+		</div>
+	</div>
+	<div class="job-detail"></div>
+</section>
+
+
+<section class="container">
+	<div class="row width80" id="aboutUS">
+		@{
+			ImageGallery gallery = galleries.Where(g => g.id == 4062).FirstOrDefault();
+			title = gallery.galleryImages.FirstOrDefault().content.Where(c => c.name == "title").FirstOrDefault().contentCollection.FirstOrDefault().body;
+			var counter = 0;
+
+			foreach (GalleryImage gi in gallery.galleryImages)
+			{
+				counter++;
+				<div class="row">
+					<div class="col-md-4 col-sm-4 hidden-xs">
+						<img src="@gi.image" class="img-circle img-responsive" />
+					</div>
+					<div class="col-md-8 col-sm-8 col-xs-12">
+
+						@{if (counter == 1)
+							{
+								<h3>@Html.Raw(title)</h3>
+							}
+						}
+						@Html.Raw(gi.content.Where(c => c.name == "text").FirstOrDefault().contentCollection.FirstOrDefault().body)
+
+					</div>
+				</div>
+							}
+		}
+	</div>
+</section>

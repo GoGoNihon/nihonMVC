@@ -1,0 +1,305 @@
+﻿@using GoGoNihon_MVC.Models;
+@using System.Linq;
+@using System.Data.Entity;
+@model pageReturnData
+
+@{
+	ICollection<Content> content = Model.page.content;
+	ICollection<ImageGallery> galleries = Model.page.galleries;
+	ICollection<Faq> faqs = Model.page.faqs;
+
+	ImageGallery gal;
+
+}
+
+
+@*<section id="alert-bar" class="container closeable">
+	<div class="row flex">
+		<div class="col-xs-1 text-center vcenter"><i class="icon icon-exclamation-circle"></i></div>
+		<div class="col-xs-10">
+			@Html.Raw(content.Where(c => c.name == "alertBar").FirstOrDefault().contentCollection.FirstOrDefault().body)
+		</div>
+		<div class="col-xs-1 text-center vcenter"><i data-close class="icon icon-times"></i></div>
+	</div>
+</section>*@
+
+@{	gal = galleries.Where(g => g.id == 1).FirstOrDefault();}
+<ul class="bxslider">
+	@{
+		foreach (GalleryImage i in gal.galleryImages)
+		{
+			<li style="background-image:url('@i.image')">
+				<div class="trans-black">
+					<div class="container text-center">
+						<div class="col-xs-12">
+							@Html.Raw(i.content.Where(c => c.name == "title").FirstOrDefault().contentCollection.FirstOrDefault().body)
+							@Html.Raw(i.content.Where(c => c.name == "text").FirstOrDefault().contentCollection.FirstOrDefault().body)
+						</div>
+
+					</div>
+				</div>
+
+			</li>
+		}
+	}
+
+</ul>
+
+
+<section class="container">
+	<div class="row">
+		<div id="top-mid-btns" class="col-xs-12">
+			<div class="flex text-center mid-btns">
+				<div class="item">
+					<div class="image">
+						<img src="~/Content/images/schoolico.svg" class="img-responsive" />
+					</div>
+					<div class="body">
+						@Html.Raw(content.Where(c => c.name == "midSection1").FirstOrDefault().contentCollection.FirstOrDefault().body)
+					</div>
+				</div>
+				<div class="item">
+					<div class="image"><img src="~/Content/images/simpleico.svg" class="img-responsive" /></div>
+					<div class="body">
+						@Html.Raw(content.Where(c => c.name == "midSection2").FirstOrDefault().contentCollection.FirstOrDefault().body)
+					</div>
+				</div>
+				<div class="item">
+					<div class="image"><img src="~/Content/images/freeico.svg" class="img-responsive" /></div>
+					<div class="body">
+						@Html.Raw(content.Where(c => c.name == "midSection3").FirstOrDefault().contentCollection.FirstOrDefault().body)
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+@{	gal = galleries.Where(g => g.id == 2).FirstOrDefault();
+	GalleryImage img = gal.galleryImages.Where(i => i.tag == "how to start").FirstOrDefault();
+	string title = img.content.Where(c => c.name == "title").FirstOrDefault().contentCollection.FirstOrDefault().body;
+	string text = img.content.Where(c => c.name == "text").FirstOrDefault().contentCollection.FirstOrDefault().body;
+}
+
+<section class="feature-bg" id="howToStartBanner" style="background-image:url('@img.image');">
+	<div class="trans-black">
+		<div class="container">
+			<div class="row">
+				<div class="bannerText col-xs-12 text-center">
+					<h1>@Html.Raw(title)</h1>
+					@Html.Raw(text)
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="howToStart" class="container">
+	<div class="row">
+		<div class="col-xs-12 col-sm-6">
+			<div class="banner">
+				<div class="title">@Html.Raw(content.Where(c => c.name == "liveAndStudy").FirstOrDefault().contentCollection.FirstOrDefault().body)</div>
+			</div>
+			<div class="flex item">
+				<a id="btn-find-school" class="icon" href="">
+					@Html.Raw(content.Where(c => c.name == "findASchool").FirstOrDefault().contentCollection.FirstOrDefault().body)
+				</a>
+				<div class="body">
+					@Html.Raw(content.Where(c => c.name == "studyTwoYears").FirstOrDefault().contentCollection.FirstOrDefault().body)
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-6">
+			<div class="banner">
+				<div class="title">@Html.Raw(content.Where(c => c.name == "summerTokyo").FirstOrDefault().contentCollection.FirstOrDefault().body)</div>
+			</div>
+			<div class="flex item">
+				<a id="btn-summer-course" class="icon" href="">
+					@Html.Raw(content.Where(c => c.name == "summerCourse").FirstOrDefault().contentCollection.FirstOrDefault().body)
+				</a>
+				<div class="body">
+					@Html.Raw(content.Where(c => c.name == "notReady").FirstOrDefault().contentCollection.FirstOrDefault().body)
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="social-icons" class="container">
+	<div class="row">
+		<div class="col-xs-12 col-sm-4">
+
+			<a id="btn-fb" class="icon" href="https://www.facebook.com/learn.Japanese.study.Japan">
+				<i class="icon icon-facebook-official"></i>
+			</a>
+		</div>
+		<div class="col-xs-12 col-sm-4">
+			<a id="btn-yt" class="icon" href="https://www.youtube.com/user/GoGoNihonGo">
+				<i class="icon icon-youtube"></i>
+			</a>
+		</div>
+		<div class="col-xs-12 col-sm-4">
+			<a id="btn-tw" class="icon" href="https://twitter.com/gogonihon">
+				<i class="icon icon-twitter"></i>
+			</a>
+		</div>
+	</div>
+</section>
+
+
+
+<div id="events-video" class='feature-video-bg '>
+	<div class='videoHolder'>
+		<iframe src="https://www.youtube.com/embed/qnzY44JWCy4?playlist=qnzY44JWCy4&loop=1&autoplay=1&amp;modestbranding=1&amp;controls=0&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1&amp;version=3&amp;playerapiid=mbYTP_bgndVideo&amp;origin=http%3A%2F%2Fgogonihon.com&amp;allowfullscreen=true&amp;wmode=transparent&amp;iv_load_policy=3&amp;html5=1" frameborder="0" allowfullscreen></iframe>
+	</div>
+	<div class="video-overlay">
+		<div class="trans-black">
+			<div class="container">
+				<div class="row">
+					<div class="bannerText col-xs-12 text-center">
+						<h2>@Html.Raw(content.Where(c => c.name == "checkEvents").FirstOrDefault().contentCollection.FirstOrDefault().body)</h2>
+						<a class="btn" href="https://www.youtube.com/watch?v=9IV3aEMls2g&list=UUGff6WOc2KyudwHNlrwYWKA" target="_blank">@Html.Raw(content.Where(c => c.name == "watchVideo").FirstOrDefault().contentCollection.FirstOrDefault().body)</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+<section id="student-quotes">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 title">
+				<h1>@Html.Raw(content.Where(c => c.name == "studentsSay").FirstOrDefault().contentCollection.FirstOrDefault().body)</h1>
+			</div>
+			<div class="col-xs-12 col-md-4 student-quote">
+				<div class="image"><img class="img-responsive img-circle" src="~/Content/images/face1.jpg" alt="Tatiana" /></div>
+				<div class="text">
+					@Html.Raw(content.Where(c => c.name == "studentReview1").FirstOrDefault().contentCollection.FirstOrDefault().body)
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-4 student-quote">
+				<div class="image"><img class="img-responsive img-circle" src="~/Content/images/face2.jpg" alt="Jason" /></div>
+				<div class="text">
+					@Html.Raw(content.Where(c => c.name == "studentReview2").FirstOrDefault().contentCollection.FirstOrDefault().body)
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-4 student-quote">
+				<div class="image"><img class="img-responsive img-circle" src="~/Content/images/face3.jpg" alt="Heather" /></div>
+				<div class="text">
+					@Html.Raw(content.Where(c => c.name == "studentReview3").FirstOrDefault().contentCollection.FirstOrDefault().body)
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+@{	gal = galleries.Where(g => g.id == 2).FirstOrDefault();
+	img = gal.galleryImages.Where(i => i.tag == "three reasons").FirstOrDefault();
+	title = img.content.Where(c => c.name == "title").FirstOrDefault().contentCollection.FirstOrDefault().body;
+	text = img.content.Where(c => c.name == "text").FirstOrDefault().contentCollection.FirstOrDefault().body;
+}
+
+<section class="feature-bg" id="three-reasonsBanner" style="background-image:url('@img.image');">
+	<div class="trans-black">
+		<div class="container">
+			<div class="row">
+				<div class="bannerText col-xs-12 text-center">
+					<h1>@Html.Raw(title)</h1>
+					@Html.Raw(text)
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<section id="three-reasons">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 main">
+				<div class="mid-btns flex text-center">
+					<div class="item">
+						<div class="image">
+							<img src="~/Content/images/japanico.svg" class="img-responsive" />
+						</div>
+						<div class="body">
+							@Html.Raw(content.Where(c => c.name == "threeReasons1").FirstOrDefault().contentCollection.FirstOrDefault().body)
+						</div>
+					</div>
+					<div class="item">
+						<div class="image"><img src="~/Content/images/studentnetworkico.svg" class="img-responsive" /></div>
+						<div class="body">
+							@Html.Raw(content.Where(c => c.name == "threeReasons2").FirstOrDefault().contentCollection.FirstOrDefault().body)
+						</div>
+					</div>
+					<div class="item">
+						<div class="image"><img src="~/Content/images/accommodationhelpico.svg" class="img-responsive" /></div>
+						<div class="body">
+							@Html.Raw(content.Where(c => c.name == "threeReasons3").FirstOrDefault().contentCollection.FirstOrDefault().body)
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="support">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6 col-xs-12 text-center hidden-xs">
+				<img src="~/Content/images/flagsico.png" class="img-responsive " />
+				<a href="#">@Html.Raw(content.Where(c => c.name == "viewSupported").FirstOrDefault().contentCollection.FirstOrDefault().body)</a>
+			</div>
+			<div id="support5Lang" class="col-sm-6">
+				@Html.Raw(content.Where(c => c.name == "supportLanguage").FirstOrDefault().contentCollection.FirstOrDefault().body)
+			</div>
+		</div>
+
+		<div class="row">
+
+			<div id="getInTouch" class="text-center col-xs-12">
+				<a href="#ContactForm" class="getInTouch-btn">
+					<div id="header-contact">
+						<span class="icon icon-mail"></span>
+						<span class="text">
+							@Html.Raw(content.Where(c => c.name == "getInTouch").FirstOrDefault().contentCollection.FirstOrDefault().body)
+						</span>
+					</div>
+				</a>
+
+			</div>
+
+		</div>
+	</div>
+</section>
+
+@Html.Partial("_ContactForm", Model)
+@Html.Partial("_Staff", new Staff(Model.languageCode))
+
+
+@{	gal = galleries.Where(g => g.id == 2).FirstOrDefault();
+	img = gal.galleryImages.Where(i => i.tag == "our office").FirstOrDefault();
+	title = img.content.Where(c => c.name == "title").FirstOrDefault().contentCollection.FirstOrDefault().body;
+	text = img.content.Where(c => c.name == "text").FirstOrDefault().contentCollection.FirstOrDefault().body;
+}
+
+<section class="feature-bg" id="ourOffice" style="background-image:url('@img.image');">
+	<div class="trans-black">
+		<div class="container">
+			<div class="row">
+				<div class="bannerText col-xs-12 text-center">
+					<h1>@Html.Raw(title)</h1>
+					@Html.Raw(text)
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

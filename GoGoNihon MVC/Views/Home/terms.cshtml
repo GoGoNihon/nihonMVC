@@ -1,0 +1,21 @@
+﻿@using GoGoNihon_MVC.Models;
+@using System.Linq;
+@using System.Data.Entity;
+@model GoGoNihon_MVC.Models.pageReturnData
+
+@{
+	ICollection<Content> content = Model.page.content;
+}
+
+<section class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<div id="terms">
+				@{
+					@Html.Raw(content.Where(c => c.name == "terms").FirstOrDefault().contentCollection.FirstOrDefault().body)
+				}
+			</div>
+		</div>
+	</div>
+</section>
+

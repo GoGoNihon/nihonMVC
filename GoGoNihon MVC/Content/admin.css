@@ -1,0 +1,387 @@
+﻿.flex {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+
+.flex-row {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row; }
+
+.flex-column {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+
+.vcenter {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center; }
+
+.input-group-addon {
+  font-weight: inherit; }
+
+.btn {
+  font-weight: inherit; }
+
+html, body {
+  height: 100%; }
+
+body {
+  color: #9b9b9b;
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: normal; }
+
+p {
+  min-height: 10px; }
+
+.divider {
+  margin-bottom: 15px; }
+
+a {
+  text-decoration: none; }
+
+.faded {
+  opacity: .3; }
+
+.orange {
+  color: #ff6e1a; }
+
+h1, h2, h3, h4 {
+  font-weight: 900;
+  text-transform: uppercase;
+  margin: 0 0 15px 0; }
+
+h1 {
+  color: #5B595B;
+  font-size: 52px; }
+
+h2 {
+  color: #9b9b9b;
+  font-size: 42px; }
+
+h3 {
+  color: #5B595B;
+  font-size: 32px; }
+
+h4 {
+  color: #5B595B;
+  font-size: 22px; }
+
+#info-bar .alert {
+  margin-top: 25px; }
+
+header {
+  background: linear-gradient(#c9353f, #912d2d); }
+  header a {
+    color: #fff; }
+  header nav.navbar-default {
+    border-radius: 0;
+    border: 0;
+    min-height: 0; }
+  header .navbar {
+    background-color: #660000;
+    text-transform: uppercase;
+    margin: 0; }
+  header .navbar-collapse {
+    padding: 0;
+    margin: 0; }
+  header .navbar-nav {
+    display: block;
+    width: 100%; }
+  header .navbar-default .navbar-nav > li:first-child > a {
+    padding-left: 0; }
+  header .navbar-default .navbar-nav > li > a {
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    padding: 10px 60px; }
+  header .navbar-default .navbar-nav li:hover {
+    background: none; }
+  header .navbar-default .navbar-nav > .active > a, header .navbar-default .navbar-nav > .active > a:hover, header .navbar-default .navbar-nav > .active > a:focus {
+    background: none;
+    color: white; }
+  header .navbar-default .navbar-nav > li > a:hover, header .navbar-default .navbar-nav > li > a:focus {
+    color: white;
+    text-decoration: underline; }
+  header .navbar-nav > li:last-child {
+    float: right; }
+  header .navbar-default .navbar-toggle {
+    background: #C9353F;
+    border: 0px solid #fff; }
+  header .navbar-default .navbar-toggle .icon-bar {
+    background-color: white; }
+  header .navbar-default .navbar-toggle:hover, header .navbar-default .navbar-toggle:focus {
+    background-color: white;
+    border: 0 solid #C9353F; }
+    header .navbar-default .navbar-toggle:hover .icon-bar, header .navbar-default .navbar-toggle:focus .icon-bar {
+      background: #C9353F; }
+  header #header-top {
+    padding: 20px 15px; }
+
+@media screen and (max-width: 1200px) {
+  header .navbar-default .navbar-nav > li > a {
+    font-size: 14px;
+    padding: 10px 48px; } }
+
+@media screen and (max-width: 992px) {
+  header .navbar-default .navbar-nav > li > a {
+    font-size: 14px;
+    padding: 10px 24px; } }
+
+@media screen and (max-width: 768px) {
+  #logo {
+    width: 100%;
+    text-align: center; }
+    #logo img {
+      display: inline; }
+  .navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border: 0 solid #fff; }
+  ul.navbar-nav {
+    margin: auto;
+    padding: 0;
+    width: 60%; }
+  nav .navbar-nav li {
+    border-bottom: 1px solid #eee; } }
+
+.admin .pendant {
+  display: inline-block;
+  vertical-align: middle; }
+  .admin .pendant .icon {
+    display: block; }
+
+.admin .form-group label {
+  color: #000;
+  text-transform: uppercase;
+  font-size: 14px; }
+
+.admin .subSection {
+  border-bottom: 1px dashed #ccc; }
+
+.admin .video-small iframe {
+  max-height: 150px;
+  margin-top: 10px; }
+
+.admin iframe {
+  max-width: 100%; }
+
+.admin .image-holder .image {
+  text-align: center;
+  margin: 15px;
+  background-position: center center;
+  background-size: cover; }
+
+.admin footer {
+  margin-top: 25px; }
+
+.admin .panel-heading {
+  cursor: pointer; }
+  .admin .panel-heading .icon {
+    float: right; }
+  .admin .panel-heading .panel-title {
+    float: left; }
+
+.admin .panel-body {
+  display: none; }
+
+.admin .label-default {
+  background-color: transparent;
+  color: #09c;
+  padding: 2px 7px;
+  text-transform: uppercase;
+  border: 1px solid #09c;
+  font-size: 10px;
+  margin-left: 10px;
+  border-radius: 8px;
+  display: inline-block;
+  vertical-align: bottom; }
+
+.admin .panel-default {
+  border-color: #09c; }
+
+.admin .panel-default > .panel-heading {
+  color: #eee;
+  background-color: #444;
+  border: 0; }
+
+.admin .input-group-addon.black {
+  color: #eee;
+  background-color: #444;
+  border-color: #09c; }
+  .admin .input-group-addon.black .fa {
+    vertical-align: inherit;
+    margin-right: 5px; }
+
+.admin .input-group-addon.roles {
+  color: #eee;
+  background-color: #fff;
+  width: 100%;
+  padding: 4px 12px; }
+  .admin .input-group-addon.roles .fa {
+    vertical-align: inherit;
+    margin-right: 5px; }
+  .admin .input-group-addon.roles .flag-icon {
+    margin-top: 0; }
+
+.admin .input-group-addon.text {
+  border: 1px solid #09c;
+  border-bottom: 0;
+  border-radius: 4px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0; }
+
+.admin .input-group-addon.black.single {
+  border: 1px solid #09c;
+  border-bottom: 0;
+  border-radius: 4px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0; }
+
+.admin .form-control:focus {
+  border-color: #09c;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 153, 204, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 153, 204, 0.6); }
+
+.admin-title {
+  padding: 25px 15px; }
+
+ul li:hover {
+  background-color: #fafafa; }
+
+ul.user-list, ul.role-list {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+  ul.user-list li, ul.role-list li {
+    padding: 10px 0;
+    padding-left: 40px;
+    border-radius: 10px;
+    clear: both;
+    position: relative; }
+    ul.user-list li span.label, ul.role-list li span.label {
+      font-size: 12px;
+      margin-right: 5px; }
+    ul.user-list li > button, ul.role-list li > button {
+      position: absolute;
+      right: 10px;
+      top: 10px; }
+  ul.user-list .icon, ul.role-list .icon {
+    color: #09c;
+    vertical-align: text-top;
+    margin-right: 10px;
+    margin-left: -27px; }
+
+#stepsBox .item {
+  padding-bottom: 20px; }
+  #stepsBox .item [type=number] {
+    max-width: 55px; }
+
+.flag-icon {
+  width: 20px;
+  margin-right: 5px;
+  margin-top: 5px;
+  float: left; }
+
+.form > div > .label {
+  margin-bottom: 0;
+  margin-top: 10px;
+  display: inline-block; }
+
+.manageUserBox {
+  display: none;
+  padding-top: 15px; }
+  .manageUserBox button {
+    margin-left: 10px; }
+  .manageUserBox .form-control {
+    margin-bottom: 0;
+    height: 24px;
+    padding: 0 12px; }
+  .manageUserBox .deleteuser {
+    padding: 5px 15px; }
+  .manageUserBox .manageList {
+    margin-bottom: 10px; }
+
+[data-roleList] button {
+  float: right;
+  margin-top: 5px;
+  margin-right: 5px; }
+
+#logo {
+  position: relative; }
+  #logo #logoff-box {
+    position: absolute;
+    top: 10px;
+    right: 10px; }
+
+#hidden-holder {
+  height: 0;
+  width: 0;
+  overflow: hidden; }
+
+.admin .navbar-nav > li:last-child {
+  float: left; }
+
+#newPageForm .form-control {
+  width: 100%; }
+
+#pageManagement {
+  background: #eee; }
+
+.admin-language-icon {
+  width: 40px;
+  margin: 0 15px;
+  display: inline-block;
+  cursor: pointer; }
+
+#editContentModal .modal-dialog {
+  width: 90%; }
+
+#editContentBox textarea {
+  min-height: 300px;
+  width: 100%; }
+
+#demoBox .input-group-addon {
+  width: 50%; }
+
+#editFeaturesGallery .item {
+  color: white;
+  padding: 25px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #09c; }
+  #editFeaturesGallery .item img {
+    margin: 10px auto; }
+
+.galleryList-row {
+  margin-bottom: 10px; }
+
+.panel-xs .panel-heading {
+  padding: 5px 15px; }
+
+body, .navbar-fixed-top, .navbar-fixed-bottom {
+  padding-right: 0 !important; }
+
+.input-group-addon .checkbox {
+  margin: 0; }
+  .input-group-addon .checkbox label {
+    text-transform: none;
+    font-weight: normal;
+    color: inherit;
+    min-height: 0; }
+
+.userManagementBox {
+  padding: 15px 10%;
+  display: none; }
+
+.flags-list {
+  display: inline-block;
+  padding: 0 10px; }
+

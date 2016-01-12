@@ -1,0 +1,330 @@
+﻿<div class="container">
+	<div class="row">
+		<div class="col-xs-12 admin-title"><h1>short course management</h1></div>
+	</div>
+</div>
+
+
+
+<div class="container shortCourseAdmin">
+
+	<div class="row">
+		<div class="form-group col-xs-12">
+			<div class="input-group">
+				<div class="input-group-addon black"><i class="icon icon-list"></i> select course</div>
+				<select data-courseShortSelect class="form-control" name="id">
+					<option value="0">select course</option>
+					<option disabled>-----</option>
+				</select>
+				<span class="input-group-btn">
+					<button class="btn btn-info" data-addNewCourse data-toggle="modal" data-target="#createShortCourseModal">add new</button>
+					<button class="btn btn-danger" data-deleteShortCourse type="button">delete</button>
+				</span>
+			</div>
+		</div>
+	</div>
+
+
+	@*edit courses general *@
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title">course<span class="label label-default label-xs">general</span></h3>
+					<div class="icon">
+						<i class="icon icon-plus-circled"></i>
+					</div>
+				</div>
+				<div class="panel-body">
+					<form id="editShortCourseGeneral" class="form" method="post" action="" data-ajax>
+
+						<div class="row">
+							<div class="form-group col-xs-12 col-sm-6">
+								<label>name</label>
+								<input type="text" class="form-control input-sm" name="name" placeholder="name" required>
+							</div>
+								<div class="form-group col-xs-12  col-sm-6">
+									<label for="name">url (<small>no spaces or special charactors</small>)</label>
+									<input type="text" class="form-control input-sm" id="url" name="url" placeholder="hypened-short-course-name" required>
+								</div>
+							</div>
+						<div class="row">
+							<div class="form-group col-xs-12 col-sm-6">
+								<label>heading video</label>
+								<input type="text" class="form-control input-sm" name="video" id="video" placeholder="youtube id ie, 9IV3aEMls2g">
+							</div>
+							<div class="form-group col-xs-12 col-sm-6 video-small">
+								<span class="label label-default label-xs">video</span>
+								<div data-shortCourseHeadingVideo class="text-center">
+
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-xs-12 col-sm-6">
+								<label>heading video cover image</label>
+								<input type="file" class="form-control input-sm" name="videoCover" accept="image/x-png, image/gif, image/jpeg">
+							</div>
+							<div class="col-xs-12 col-sm-6 image-holder ">
+								<span class="label label-default label-xs">image</span>
+								<div class="image videoCover">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-xs-12">
+								<label>booking link</label>
+								<input type="text" class="form-control input-sm" name="bookNowLink" placeholder="ie https://gogoworld.formstack.com/forms/cool_japan_2016" required>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-xs-12 col-sm-6">
+								<label>description image</label>
+								<input type="file" class="form-control input-sm" name="descriptionImage" accept="image/x-png, image/gif, image/jpeg">
+							</div>
+							<div class="col-xs-12 col-sm-6 image-holder ">
+								<span class="label label-default label-xs">image</span>
+								<div class="image descriptionImage">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+								<div class="form-group col-xs-12">
+									<label>description heading</label>
+									<input type="text" class="form-control input-sm" name="descriptionHeading" placeholder="description heading" required>
+								</div>
+							</div>
+						<div class="row">
+							<div class="form-group col-xs-12">
+								<label>dates</label>
+								<textarea data-wysiwyg-xs name="dates" id="dates"></textarea>
+							</div>
+							<div class="form-group col-xs-12">
+								<div class="input-group">
+									<div class="input-group-addon black"><i class="icon icon-list"></i> select school</div>
+									<select type="text" class="form-control input-sm" data-schoolListShort name="schoolID" id="school-listShort"></select>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-xs-12 text-center">
+								<button type="submit" class="btn btn-default">save</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	@*edit courses galleries *@
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title">course<span class="label label-default label-xs">galleries</span></h3>
+					<div class="icon">
+						<i class="icon icon-plus-circled"></i>
+					</div>
+				</div>
+				<div class="panel-body">
+
+					<div id="editShortCourseGalleries">
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	@*edit courses CULTURAL ACTIVITIES *@
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title">course<span class="label label-default label-xs">CULTURAL ACTIVITIES</span></h3>
+					<div class="icon">
+						<i class="icon icon-plus-circled"></i>
+					</div>
+				</div>
+				<div class="panel-body">
+					<form id="addShortCourseCultureGallery" class="form" method="post" action="" data-ajax>
+						<div class="row">
+							<div class="form-group col-xs-12">
+								<div class="input-group">
+									<div class="input-group-addon black"><i class="icon icon-camera"></i> add activity gallery</div>
+									<div class="input-group-addon">name</div>
+									<input class="form-control input-sm" name="name" required>
+									<span class="input-group-btn">
+										<button class="btn btn-info btn-sm" type="submit"><i class="icon icon-plus"></i> add</button>
+									</span>
+								</div>
+							</div>
+						</div>
+					</form>
+					<div class="row">
+						<div class="col-xs-12">
+							<hr />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12" id="editCulturalGalleries">
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	@*edit courses plan *@
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title">course<span class="label label-default label-xs">Plan</span></h3>
+					<div class="icon">
+						<i class="icon icon-plus-circled"></i>
+					</div>
+				</div>
+				<div class="panel-body">
+					<form id="addPlanFeature" class="form" method="post" action="" data-ajax>
+						<div class="row">
+							<div class="form-group col-xs-12">
+								<div class="input-group">
+									<div class="input-group-addon black"><i class="icon icon-plus"></i> plan feature</div>
+									<div class="input-group-addon">name</div>
+									<input class="form-control input-sm" name="name" required>
+									<div class="input-group-addon">
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" name="bronze"> bronze
+											</label>
+										</div>
+									</div>
+									<div class="input-group-addon">
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" name="silver"> silver
+											</label>
+										</div>
+									</div>
+									<div class="input-group-addon">
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" name="gold"> gold
+											</label>
+										</div>
+									</div>
+									<span class="input-group-btn">
+										<button data-addPlanFeature class="btn btn-info btn-sm" type="button">add</button>
+									</span>
+								</div>
+							</div>
+						</div>
+					</form>
+					<div class="row">
+						<div class="col-xs-12">
+							<hr />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12" id="editPlanBox">
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	@*edit faq *@
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title">course<span class="label label-default label-xs">faq</span></h3>
+					<div class="icon">
+						<i class="icon icon-plus-circled"></i>
+					</div>
+				</div>
+				<div class="panel-body">
+					<form id="addShortCourseFaq" class="form" method="post" action="" data-ajax>
+						<div class="row">
+							<div class="form-group col-xs-12">
+								<div class="input-group">
+									<div class="input-group-addon black"><i class="icon icon-help-circled"></i>question</div>
+									<input class="form-control input-sm" name="question" required>
+									<span class="input-group-btn">
+										<button class="btn btn-info btn-sm" type="submit">add Q & A</button>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-xs-12">
+								<div class="input-group-addon black text"><i class="icon icon-comment"></i>answer</div>
+								<textarea data-wysiwyg-xs name="answer" id="addFaqAnswer"></textarea>
+							</div>
+						</div>
+					</form>
+
+					<div class="row">
+						<div id="FAQContainer" class="col-xs-12">
+							
+								
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+
+	@*end container*@
+</div>
+
+
+
+<div class="modal fade" id="createShortCourseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<form method="post" action="/api/addShortCourse/getShortCourses" data-ajax id="addShortCourseForm">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">enter new short course</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="form-group col-xs-12 col-sm-6">
+							<label>name</label>
+							<input type="text" class="form-control input-sm" name="name" required>
+						</div>
+						<div class="form-group col-xs-12  col-sm-6">
+							<label for="name">url (<small>no spaces or special charactors</small>)</label>
+							<input type="text" class="form-control input-sm" id="url" name="url" placeholder="hypened-school-name" required>
+						</div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">close</button>
+					<button type="submit" class="btn btn-primary btn-sm" data-btn-modal-save>save</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+

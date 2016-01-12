@@ -1,0 +1,34 @@
+﻿@model GoGoNihon_MVC.Models.pageReturnData
+
+<section id="ContactForm">
+
+	<div class="body">
+
+		<i class="icon icon-mail"></i>
+
+		<div class="innerForm">
+			@if (Model.languageCode.Contains("en")) //English Form
+            {
+				<script type="text/javascript" src="https://gogoworld.formstack.com/forms/js.php/gogonihoninternational"></script><noscript><a href="https://gogoworld.formstack.com/forms/gogonihoninternational" title="Online Form">Online Form - Go! Go! Nihon, Contact Form [International]</a></noscript>
+            }
+            else if (Model.languageCode.Contains("de")) //German Form
+            {
+				<script type="text/javascript" src="https://gogoworld.formstack.com/forms/js.php/gogonihondeutsche"></script><noscript><a href="https://gogoworld.formstack.com/forms/gogonihondeutsche" title="Online Form">Online Form - Go! Go! Nihon, Contact Form [German]</a></noscript>
+            }
+            else if (Model.languageCode.Contains("es")) //Spanish Form
+            {
+				<script type="text/javascript" src="https://gogoworld.formstack.com/forms/js.php/gogonihonespanol"></script><noscript><a href="https://gogoworld.formstack.com/forms/gogonihonespanol" title="Online Form">Online Form - Go! Go! Nihon, Contact Form [Spanish]</a></noscript>
+            }
+            else if (Model.languageCode.Contains("it")) //Italian Form
+            {
+				<script type="text/javascript" src="https://gogoworld.formstack.com/forms/js.php/gogonihonitalia"></script><noscript><a href="https://gogoworld.formstack.com/forms/gogonihonitalia" title="Online Form">Online Form - Go! Go! Nihon, Contact Form [Italian]</a></noscript>
+            }
+            else //Swedish Form
+            {
+				<script type="text/javascript" src="https://gogoworld.formstack.com/forms/js.php/gogonihonsverige"></script><noscript><a href="https://gogoworld.formstack.com/forms/gogonihonsverige" title="Online Form">Online Form - Go! Go! Nihon, Contact Form [Swedish]</a></noscript>
+            }
+		</div>
+
+	</div>
+
+</section>

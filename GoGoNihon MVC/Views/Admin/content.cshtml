@@ -1,0 +1,329 @@
+﻿@using GoGoNihon_MVC.Models
+@model GoGoNihon_MVC.Models.adminReturnData
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 admin-title">
+			<h1>Content Management</h1>
+		</div>
+	</div>
+
+
+
+	<div class="row">
+		<div class="form-group col-xs-12">
+			<div class="input-group">
+				<div class="input-group-addon black"><i class="icon icon-list"></i> select page</div>
+				<select class="form-control" name="pageID" id="pageSelect"></select>
+				<span class="input-group-btn">
+					<button class="btn btn-info" data-addNewCourse data-toggle="modal" data-target="#createPageModal">add new</button>
+					<button data-pageDelete type="submit" data-deletePage class="btn btn-danger">delete</button>
+				</span>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title">page<span class="label label-default label-xs">info</span></h3>
+					<div class="icon">
+						<i class="icon icon-plus-circled"></i>
+					</div>
+				</div>
+				<div class="panel-body" id="pageInfo">
+					<div class="row">
+						<div class="form-group col-xs-12">
+							<div class="input-group">
+								<div class="input-group-addon black"><i class="icon icon-doc-text"></i>page</div>
+								<input type="text" data-pageName class="form-control" id="pageName" name="name" placeholder="page name" required />
+								<div class="input-group-addon black">ID</div>
+								<div class="input-group-addon" data-showPageID></div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-xs-12">
+							<div class="input-group-addon black text"><i class="icon icon-comment"></i>description</div>
+							<textarea data-pageDescription class="form-control" name="description" placeholder="Page Description" required></textarea>
+						</div>
+						<div class="col-xs-12 text-right">
+							<button type="button" class="btn btn-info btn-sm" data-updatePage>update</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title">page<span class="label label-default label-xs">content</span></h3>
+					<div class="icon">
+						<i class="icon icon-plus-circled"></i>
+					</div>
+				</div>
+				<div class="panel-body">
+					<div id="addPageContent" class="clearfix row">
+						<div class="col-xs-12">
+							<form class="form" id="newContentForm" action="api/addContent" method="post" data-ajax>
+								<input class="form-control" type="hidden" name="pageID" value="" id="addContentPageID" />
+								<div class="input-group">
+									<div class="input-group-addon black"><i class="icon icon-doc-text"></i> add content area</div>
+									<div class="input-group-addon">name</div>
+									<input class="form-control input-sm" id="addContentName" name="name" required="">
+									<span class="input-group-btn">
+										<button data-addContent="" class="btn btn-info btn-sm" type="submit"><i class="icon icon-plus"></i> add</button>
+									</span>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12">
+							<hr>
+						</div>
+					</div>
+					<form class="form clearfix" id="pageContentForm" action="api/editContent/getContentList" method="post" data-ajax>
+						<div class="row">
+
+							<div class="col-xs-12">
+								<div id="pageContent" class="clearfix form-group">
+
+									<input type="hidden" id="editContentPageID" name="pageID" />
+									<div class="input-group">
+										<div class="input-group-addon black"><i class="icon icon-list"></i> select content area</div>
+										<select class="form-control input-sm" name="contentID" id="contentSelect"></select>
+										<span class="input-group-btn">
+											<button class="btn btn-danger btn-sm" data-deleteContent="" type="button">delete</button>
+										</span>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="form-group">
+									<div class="input-group">
+										<div class="input-group-addon black">name</div>
+										<input class="form-control input-sm" data-contentEditName name="name" required="">
+										<span class="input-group-btn">
+											<button data-editContentName class="btn btn-info btn-sm" type="submit">update</button>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+					<br />
+					<div id="content-lannguage-icons" class="clearfix">
+						<div class="input-group-addon black text"><i class="icon icon-flag"></i>languages</div>
+						<div class="well well-lg" data-language-icons>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	@*edit page galleries *@
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title">page<span class="label label-default label-xs">galleries</span></h3>
+					<div class="icon">
+						<i class="icon icon-plus-circled"></i>
+					</div>
+				</div>
+				<div class="panel-body">
+					<form id="addPageGallery" class="form" method="post" action="" data-ajax>
+						<div class="row">
+							<div class="form-group col-xs-12">
+								<div class="input-group">
+									<div class="input-group-addon black"><i class="icon icon-camera"></i> add gallery</div>
+									<div class="input-group-addon">name</div>
+									<input class="form-control input-sm" name="name" required>
+									<span class="input-group-btn">
+										<button class="btn btn-info btn-sm" type="submit"><i class="icon icon-plus"></i> add</button>
+									</span>
+								</div>
+							</div>
+						</div>
+					</form>
+					<div class="row">
+						<div class="col-xs-12">
+							<hr />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12" id="editPageGalleries">
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	@*edit faq *@
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title">page<span class="label label-default label-xs">faqs</span></h3>
+					<div class="icon">
+						<i class="icon icon-plus-circled"></i>
+					</div>
+				</div>
+				<div class="panel-body">
+					<form id="addPageFaq" class="form" method="post" action="" data-ajax>
+						<div class="row">
+							<div class="form-group col-xs-12">
+								<div class="input-group">
+									<div class="input-group-addon black"><i class="icon icon-help-circled"></i> add faq</div>
+									<div class="input-group-addon">name</div>
+									<input class="form-control input-sm" name="name" required>
+									<span class="input-group-btn">
+										<button class="btn btn-info btn-sm" type="submit"><i class="icon icon-plus"></i> add</button>
+									</span>
+								</div>
+							</div>
+						</div>
+					</form>
+					<div class="row">
+						<div class="col-xs-12">
+							<hr />
+						</div>
+					</div>
+					<div class="row">
+						<div id="FAQSelect" class="col-xs-12">
+
+
+						</div>
+					</div>
+					<form id="addFaqQuestion" class="form" method="post" action="" data-ajax>
+						<div class="row">
+							<div class="form-group col-xs-12">
+								<div class="input-group">
+									<div class="input-group-addon black"><i class="icon icon-help-circled"></i>question</div>
+									<input class="form-control input-sm" name="question" required>
+									<span class="input-group-btn">
+										<button class="btn btn-info btn-sm" type="submit">add Q & A</button>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-xs-12">
+								<div class="input-group-addon black text"><i class="icon icon-comment"></i>answer</div>
+								<textarea data-wysiwyg-xs name="answer" id="addFaqAnswer"></textarea>
+							</div>
+						</div>
+					</form>
+
+					<div class="row">
+						<div id="FAQContainer" class="col-xs-12">
+
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="modal fade" id="createPageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<form method="post" id="newPageForm" action="/api/addNewPage" data-ajax>
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">add new page</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="form-group col-xs-12">
+							<div class="input-group">
+								<div class="input-group-addon black"><i class="icon icon-doc-text"></i>page</div>
+								<input type="text" class="form-control" id="pageName" name="name" placeholder="page name" required />
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-xs-12">
+							<div class="input-group-addon black text"><i class="icon icon-comment"></i>description</div>
+							<textarea class="form-control" name="description" placeholder="Page Description" required></textarea>
+						</div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">cancel</button>
+					<button type="submit" class="btn btn-primary btn-sm" data-btn-modal-save>add page</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" id="editContentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<form class="form-inline" id="editContentBodyForm" action="api/addContentBody/refreshContent" method="post" data-ajax>
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+				</div>
+				<div class="modal-body">
+					<div id="editContentBox">
+
+						<input type="hidden" name="contentID" value="" />
+						<input type="hidden" name="code" value="" />
+						<input type="hidden" name="contentBodyID" value="" />
+						<textarea id="pageContentEditor" data-wysiwyg class="form-control" name="body"></textarea>
+
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Save and close</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+

@@ -1,0 +1,609 @@
+﻿@using GoGoNihon_MVC.Models;
+@using System.Linq;
+@using System.Data.Entity;
+@model pageReturnData
+
+@{
+	ICollection<Content> content = Model.page.content;
+	ICollection<ImageGallery> galleries = Model.page.galleries;
+	ICollection<Faq> faqs = Model.page.faqs;
+	School school = Model.school;
+	List<SchoolCourse> courses = Model.courses;
+}
+
+@{	@*ImageGallery gal;
+		GalleryImage img;
+		ICollection<Content> galleryContent;
+		Content titleContent = galleryContent.Where(cn => cn.name == "title").FirstOrDefault();
+		String title = (titleContent.contentCollection.FirstOrDefault()).body;
+		Content textContent = galleryContent.Where(cn => cn.name == "text").FirstOrDefault();
+		String text = (textContent.contentCollection.FirstOrDefault()).body;*@
+
+
+}
+
+
+
+
+<div id="schoolHeading-video" class='feature-video-bg' style="background-image:url('@school.videoCover')">
+	<div class='videoHolder'>
+		<iframe src="https://www.youtube.com/embed/@school.previewVideo?playlist=@school.previewVideo&loop=1&autoplay=1&amp;modestbranding=1&amp;controls=0&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1&amp;version=3&amp;playerapiid=mbYTP_bgndVideo&amp;origin=http%3A%2F%2Fgogonihon.com&amp;allowfullscreen=true&amp;wmode=transparent&amp;iv_load_policy=3&amp;html5=1" frameborder="0" allowfullscreen></iframe>
+	</div>
+	<div class="video-overlay">
+		<div class="trans-black">
+			<div class="container">
+				<div class="row">
+					<div class="bannerText col-xs-12 text-center">
+						<h2>@Html.Raw(school.content.Where(c => c.name == "name").FirstOrDefault().contentCollection.FirstOrDefault().body)</h2>
+						<a class="btn" href="https://www.youtube.com/watch?v=@school.video&list=UUGff6WOc2KyudwHNlrwYWKA" target="_blank">watch the full video</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<section id="introduction">
+	<div class="container width80">
+		<div class="row">
+			<div class="col-xs-12 col-sm-4">
+				<img src="@school.introductionImage" class="img-circle img-responsive" alt="" />
+
+			</div>
+			<div class="col-xs-12 col-sm-8">
+				@Html.Raw(content.Where(c => c.name == "introduction heading").FirstOrDefault().contentCollection.FirstOrDefault().body)
+				@Html.Raw(school.content.Where(c => c.name == "introduction").FirstOrDefault().contentCollection.FirstOrDefault().body)
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="intensity">
+	<div class="container width80">
+		<div class="row">
+			<div class="col-xs-12 col-sm-4">
+				<img src="@school.intensityImage" class="img-circle img-responsive" alt="" />
+			</div>
+			<div class="col-xs-12 col-sm-8">
+				@Html.Raw(content.Where(c => c.name == "intensity heading").FirstOrDefault().contentCollection.FirstOrDefault().body)
+				<div id="intensity-caps" data-intensity="@school.intensity">
+					<i class="icon icon-graduation-cap"></i>
+					<i class="icon icon-graduation-cap"></i>
+					<i class="icon icon-graduation-cap"></i>
+					<i class="icon icon-graduation-cap"></i>
+					<i class="icon icon-graduation-cap"></i>
+					<div class="intensity-levels">
+						@{
+							List<FaqQuestion> questions = faqs.Where(f => f.name == "Intensity Levels").FirstOrDefault().questions;
+							@Html.Raw(questions[school.intensity - 1].content.Where(cn => cn.name == "answer").FirstOrDefault().contentCollection.FirstOrDefault().body)
+						}
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="feature-bg" id="features-banner" style="background-image:url('@school.featuresImage');">
+	<div class="trans-black">
+		<div class="container">
+			<div class="row">
+				<div class="bannerText col-xs-12 text-center">
+					<h1>@Html.Raw(content.Where(c => c.name == "school features").FirstOrDefault().contentCollection.FirstOrDefault().body)</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="features">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 feature">
+				<div class="usp">
+					<div class="pendant">
+						<i class="icon icon-star"></i>
+						<i class="icon icon-bookmark"></i>
+					</div>
+					<h3>@Html.Raw(school.content.Where(c => c.name == "USP").FirstOrDefault().contentCollection.FirstOrDefault().body)</h3>
+					@Html.Raw(school.content.Where(c => c.name == "uniqueFeatureText").FirstOrDefault().contentCollection.FirstOrDefault().body)
+
+				</div>
+			</div>
+
+			@{
+				if (school.features.studentCafe)
+				{
+					<div class="col-xs-12 feature">
+						<i class="icon icon-coffee"></i>
+						@Html.Raw(content.Where(c => c.name == "studentCafe").FirstOrDefault().contentCollection.FirstOrDefault().body)
+					</div>
+				}
+				if (school.features.acceptsBeginners)
+				{
+					<div class="col-xs-12 feature">
+						<i class="icon icon-child"></i>
+						@Html.Raw(content.Where(c => c.name == "acceptsBeginners").FirstOrDefault().contentCollection.FirstOrDefault().body)
+					</div>
+				}
+				if (school.features.englishStaff)
+				{
+					<div class="col-xs-12 feature">
+						<i class="icon icon-comment"></i>
+						@Html.Raw(content.Where(c => c.name == "englishStaff").FirstOrDefault().contentCollection.FirstOrDefault().body)
+					</div>
+				}
+				if (school.features.fullTimeJobSupport)
+				{
+					<div class="col-xs-12 feature">
+						<i class="icon icon-briefcase"></i>
+						@Html.Raw(content.Where(c => c.name == "fullTimeJobSupport").FirstOrDefault().contentCollection.FirstOrDefault().body)
+					</div>
+				}
+				if (school.features.interactWithJapanese)
+				{
+					<div class="col-xs-12 feature">
+						<i class="icon icon-hand-peace-o"></i>
+						@Html.Raw(content.Where(c => c.name == "interactWithJapanese").FirstOrDefault().contentCollection.FirstOrDefault().body)
+					</div>
+				}
+				if (school.features.partTimeJobSupport)
+				{
+					<div class="col-xs-12 feature">
+						<i class="icon icon-briefcase"></i>
+						@Html.Raw(content.Where(c => c.name == "partTimeJobSupport").FirstOrDefault().contentCollection.FirstOrDefault().body)
+					</div>
+				}
+				if (school.features.smallClassSizes)
+				{
+					<div class="col-xs-12 feature">
+						<i class="icon icon-users"></i>
+						@Html.Raw(content.Where(c => c.name == "smallClassSizes").FirstOrDefault().contentCollection.FirstOrDefault().body)
+					</div>
+				}
+				if (school.features.studentDorms)
+				{
+					<div class="col-xs-12 feature">
+						<i class="icon icon-building"></i>
+						@Html.Raw(content.Where(c => c.name == "studentDorms").FirstOrDefault().contentCollection.FirstOrDefault().body)
+					</div>
+				}
+				if (school.features.studentLounge)
+				{
+					<div class="col-xs-12 feature">
+						<i class="icon icon-coffee"></i>
+						@Html.Raw(content.Where(c => c.name == "studentLounge").FirstOrDefault().contentCollection.FirstOrDefault().body)
+					</div>
+				}
+				if (school.features.studentLounge24hour)
+				{
+					<div class="col-xs-12 feature">
+						<i class="icon icon-coffee"></i>
+						@Html.Raw(content.Where(c => c.name == "studentLounge24hour").FirstOrDefault().contentCollection.FirstOrDefault().body)
+					</div>
+				}
+				if (school.features.wifiInCommonAreas)
+				{
+					<div class="col-xs-12 feature">
+						<i class="icon icon-wifi"></i>
+						@Html.Raw(content.Where(c => c.name == "wifiInCommonAreas").FirstOrDefault().contentCollection.FirstOrDefault().body)
+					</div>
+				}
+			}
+		</div>
+	</div>
+</section>
+
+
+
+
+<section class="feature-bg" id="location-banner" style="background-image:url('@school.schoolLocation.image');">
+	<div class="trans-black">
+		<div class="container">
+			<div class="row">
+				<div class="bannerText col-xs-12 text-center">
+					<h3>@Html.Raw(content.Where(c => c.name == "school location").FirstOrDefault().contentCollection.FirstOrDefault().body)</h3>
+					<h1>@school.schoolLocation.name</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="location">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				@Html.Raw(school.schoolLocation.contentCollection.FirstOrDefault().contentCollection.FirstOrDefault().body)
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<section class="feature-bg" id="location-map" style="">
+	@Html.Raw(school.googleMap)
+</section>
+
+<section id="stations">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<h3>@Html.Raw(content.Where(c => c.name == "distanceToStations").FirstOrDefault().contentCollection.FirstOrDefault().body)</h3>
+
+				@{
+					foreach (SchoolStation station in school.schoolStations)
+					{
+						<div class="station" style="background-image:url('@station.image')">
+							<div class="trans-black">
+								<div class="title">@station.name (@station.distance)</div>
+								<i class="icon icon-circle"></i>
+								<div class="text">@station.line</div>
+							</div>
+
+						</div>
+					}
+				}
+
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="feature-bg" id="courses-banner" style="background-image:url('@school.coursesImage');">
+	<div class="trans-black">
+		<div class="container">
+			<div class="row">
+				<div class="bannerText col-xs-12 text-center">
+					<h1>@Html.Raw(school.content.Where(c => c.name == "coursesHeading").FirstOrDefault().contentCollection.FirstOrDefault().body)</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+
+<div class="course-wrap">
+
+
+	<div id="courseSelect">
+		@{
+			foreach (SchoolCourse course in courses)
+			{
+				<div class="course" data-course="@course.id">
+					@if (course.type == 0)
+					{
+						<div class="icon"><i class="icon icon-graduation-cap"></i></div>
+					}
+					@if (course.type == 1)
+					{
+						<div class="icon"><i class="icon icon-comments"></i></div>
+
+					}
+					@if (course.type == 2)
+					{
+						<div class="icon"><i class="icon icon-briefcase"></i></div>
+					}
+					<div>@Html.Raw(course.courseContent.Where(c => c.name == "name").FirstOrDefault().contentCollection.FirstOrDefault().body)</div>
+				</div>
+
+			}
+		}
+	</div>
+
+	<div  id="course-details">
+		@foreach (SchoolCourse course in courses)
+		{
+
+			
+
+			<div class="course-detail" data-course="@course.id">
+
+				<div class="container">
+					<div class="row">
+
+						<section id="course-intro">
+							<div class="container width80">
+								<div class="row">
+									<div class="col-xs-12 col-sm-3">
+										<img src="@course.introductionImage" class="img-circle img-responsive" alt="" />
+
+									</div>
+									<div class="col-xs-12 col-sm-9">
+										@Html.Raw(course.courseContent.Where(c => c.name == "courseIntroduction").FirstOrDefault().contentCollection.FirstOrDefault().body)
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<section id="course-lengths">
+							<div class="container width80">
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="cat-line">
+											<div class="line"></div>
+											<div class="cat"><img class="img-responsive" src="~/Content/images/redcat.svg" /></div>
+											<div class="line"></div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-12 text-center">
+										@Html.Raw(content.Where(c => c.name == "courseLengthHeading").FirstOrDefault().contentCollection.FirstOrDefault().body)
+									</div>
+
+									@foreach (CourseLength length in course.courseLengths)
+									{
+										<div class="term-length col-xs-12 col-sm-6">
+											@if (length.withVisa)
+											{
+												<div class="title">@Html.Raw(content.Where(c => c.name == "withVisa").FirstOrDefault().contentCollection.FirstOrDefault().body)</div>
+}
+											else
+											{
+												<div class="title">@Html.Raw(content.Where(c => c.name == "withoutVisa").FirstOrDefault().contentCollection.FirstOrDefault().body)</div>
+}
+											<div class="body">
+												@if (length.from == length.to)
+												{
+													@length.from @: @Html.Raw(content.Where(c => c.name == "months").FirstOrDefault().contentCollection.FirstOrDefault().body)
+										}
+												else
+												{
+													@length.from @:- @length.to @Html.Raw(content.Where(c => c.name == "months").FirstOrDefault().contentCollection.FirstOrDefault().body)
+										}
+											</div>
+										</div>
+									}
+								</div>
+							</div>
+						</section>
+
+						<section id="course-terms">
+							<div class="container width80">
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="cat-line">
+											<div class="line"></div>
+											<div class="cat"><img class="img-responsive" src="~/Content/images/redcat.svg" /></div>
+											<div class="line"></div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-12 text-center list-as-table">
+										@Html.Raw(course.courseContent.Where(c => c.name == "termStarts").FirstOrDefault().contentCollection.FirstOrDefault().body)
+									</div>
+								</div>
+							</div>
+						</section>
+
+
+						<section id="course-schedule">
+							<div class="container width80">
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="cat-line">
+											<div class="line"></div>
+											<div class="cat"><img class="img-responsive" src="~/Content/images/redcat.svg" /></div>
+											<div class="line"></div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-12 text-center list-as-table">
+										<div class="title">
+											<i class="icon icon-clock-o"></i>
+											@Html.Raw(content.Where(c => c.name == "scheduleHeading").FirstOrDefault().contentCollection.FirstOrDefault().body)
+										</div>
+										@Html.Raw(course.courseContent.Where(c => c.name == "scheduleText").FirstOrDefault().contentCollection.FirstOrDefault().body)
+									</div>
+									<div class="col-xs-12 text-center">
+										@Html.Raw(content.Where(c => c.name == "hoursPerWeek").FirstOrDefault().contentCollection.FirstOrDefault().body)
+										@course.hoursPerWeek
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<section id="course-termSteps">
+							<div class="container width80">
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="cat-line">
+											<div class="line"></div>
+											<div class="cat"><img class="img-responsive" src="~/Content/images/redcat.svg" /></div>
+											<div class="line"></div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-12 text-center">
+										<div class="title">
+											@Html.Raw(content.Where(c => c.name == "termsHeadingText").FirstOrDefault().contentCollection.FirstOrDefault().body)
+										</div>
+									</div>
+									<div class="col-xs-12 text-center">
+										@{	int stepLength = (100 / (course.termSteps.Count - 1));
+											int extra = 0;
+
+											if ((100 % (course.termSteps.Count - 1)) != 0)
+											{
+												stepLength++;
+												extra = 1 * (course.termSteps.Count - 2);
+											}
+
+											double currentLength = 0;
+											int counter = 0;
+
+										}
+										<div class="stepContainer">
+											<input type="range" max="@(100 + extra)" step="@stepLength" value="0" />
+										</div>
+										<div class="labels">
+											<div class="label">@Html.Raw(content.Where(c => c.name == "beginner").FirstOrDefault().contentCollection.FirstOrDefault().body)</div>
+											<div class="label">@Html.Raw(content.Where(c => c.name == "endCourse").FirstOrDefault().contentCollection.FirstOrDefault().body)</div>
+										</div>
+										<div class="stepsBox clearfix">
+											@foreach (TermBreakdownStep step in course.termSteps)
+											{
+												currentLength += stepLength;
+												int position = 0;
+												if (counter == 0)
+												{
+													position = 0;
+													currentLength = 0;
+												}
+												else
+												{
+													position = Convert.ToInt16(currentLength);
+												}
+
+												<div class="termStep" data-step="@position">@Html.Raw(step.stepContent.FirstOrDefault().contentCollection.FirstOrDefault().body)</div>counter++;
+											}
+										</div>
+
+
+									</div>
+								</div>
+							</div>
+						</section>
+
+
+						<section id="course-costs">
+							<div class="container width80">
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="cat-line">
+											<div class="line"></div>
+											<div class="cat"><img class="img-responsive" src="~/Content/images/redcat.svg" /></div>
+											<div class="line"></div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-12 text-center">
+										<div class="title">
+											<i class="icon icon-jpy"></i>
+											@Html.Raw(content.Where(c => c.name == "costsHeading").FirstOrDefault().contentCollection.FirstOrDefault().body)
+										</div>
+										<div class="hasTable">
+											@Html.Raw(course.courseContent.Where(c => c.name == "costsText").FirstOrDefault().contentCollection.FirstOrDefault().body)
+										</div>
+										<div class="insuranceNote">
+											@Html.Raw(content.Where(c => c.name == "aboutInsurance").FirstOrDefault().contentCollection.FirstOrDefault().body)
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<section id="course-features">
+							<div class="container">
+								<div class="row">
+									<div class="col-xs-12 title">
+										@Html.Raw(content.Where(c => c.name == "courseFeaturesHeading").FirstOrDefault().contentCollection.FirstOrDefault().body)
+									</div>
+
+									@{
+										if (course.features.businessClasses)
+										{
+											<div class="col-xs-12 feature">
+												<i class="icon icon-briefcase"></i>
+												@Html.Raw(content.Where(c => c.name == "businessClasses").FirstOrDefault().contentCollection.FirstOrDefault().body)
+											</div>
+}
+										if (course.features.conversationClasses)
+										{
+											<div class="col-xs-12 feature">
+												<i class="icon icon-comment"></i>
+												@Html.Raw(content.Where(c => c.name == "conversationClasses").FirstOrDefault().contentCollection.FirstOrDefault().body)
+											</div>}
+										if (course.features.cultureClasses)
+										{
+											<div class="col-xs-12 feature">
+												<i class="icon icon-video-camera"></i>
+												@Html.Raw(content.Where(c => c.name == "cultureClasses").FirstOrDefault().contentCollection.FirstOrDefault().body)
+											</div>}
+										if (course.features.currentEventsClasses)
+										{
+											<div class="col-xs-12 feature">
+												<i class="icon icon-newspaper-o"></i>
+												@Html.Raw(content.Where(c => c.name == "currentEventsClasses").FirstOrDefault().contentCollection.FirstOrDefault().body)
+											</div>}
+										if (course.features.higherEducationPrep)
+										{
+											<div class="col-xs-12 feature">
+												<i class="icon icon-graduation-cap"></i>
+												@Html.Raw(content.Where(c => c.name == "higherEducationPrep").FirstOrDefault().contentCollection.FirstOrDefault().body)
+											</div>}
+										if (course.features.jlptClasses)
+										{
+											<div class="col-xs-12 feature">
+												<i class="icon icon-graduation-cap"></i>
+												@Html.Raw(content.Where(c => c.name == "higherEducationPrep").FirstOrDefault().contentCollection.FirstOrDefault().body)
+											</div>}
+
+									}
+								</div>
+							</div>
+						</section>
+
+
+					</div>
+				</div>
+
+
+				
+
+				<section class="feature-bg" id="course-demo" style="background-image:url('@course.demographyImage');">
+					<div class="trans-black">
+						<div class="container">
+							<div class="row">
+								<div class="bannerText col-xs-12 text-center">
+									<h3>@Html.Raw(content.Where(c => c.name == "demographyHeading").FirstOrDefault().contentCollection.FirstOrDefault().body)</h3>
+									<div class="demographiesContainer trans-black">
+										
+										
+										@foreach (CourseDemography demo in course.courseDemographies)
+										{
+											<div class="demo-row row">
+												<div class="col-xs-4">
+													<div class="title text-right">@demo.content.FirstOrDefault().contentCollection.FirstOrDefault().body</div>
+												</div>
+												<div class="col-xs-8">
+													<div class="percent" style="width:@(demo.percent)%"></div>		
+												</div>
+
+											</div>
+											
+										}
+
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+
+			</div>
+
+									}
+	</div>
+
+
+
+
+
+
+
+
+	
+</div>

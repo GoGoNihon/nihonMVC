@@ -1,0 +1,18 @@
+﻿[
+  {
+    "outputFile": "Content/style.css",
+    "inputFile": "Content/style.scss"
+  },
+  {
+    "outputFile": "Content/admin.css",
+    "inputFile": "Content/admin.scss"
+  },
+  {
+    "outputFile": "bower_components/bootstrap/less/bootstrap.css",
+    "inputFile": "bower_components/bootstrap/less/bootstrap.less"
+  },
+  {
+    "outputFile": "bower_components/bootstrap/Gruntfile.es5.js",
+    "inputFile": "bower_components/bootstrap/Gruntfile.js"
+  }
+]

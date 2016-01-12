@@ -1,0 +1,433 @@
+﻿@using GoGoNihon_MVC.Models;
+@using System.Linq;
+@using System.Data.Entity;
+@model pageReturnData
+
+@{
+	ICollection<Content> content = Model.page.content;
+	ICollection<ImageGallery> galleries = Model.page.galleries;
+	ICollection<Faq> faqs = Model.page.faqs;
+	ICollection<School> schools = Model.schools;
+
+
+	ImageGallery gal;
+	GalleryImage img;
+	string title;
+
+	List<School> tokyoSchools = new List<School>();
+	List<School> osakaSchools = new List<School>();
+	List<School> yokohamaSchools = new List<School>();
+	List<School> kyotoSchools = new List<School>();
+	List<School> fukuokaSchools = new List<School>();
+	List<School> sapporoSchools = new List<School>();
+
+	foreach (School s in schools)
+	{
+		if (s.schoolLocation.city.ToLower()  == "tokyo")
+		{
+			tokyoSchools.Add(s);
+		}
+		if (s.schoolLocation.city.ToLower() == "osaka")
+		{
+			osakaSchools.Add(s);
+		}
+		if (s.schoolLocation.city.ToLower() == "yokohama")
+		{
+			yokohamaSchools.Add(s);
+		}
+		if (s.schoolLocation.city.ToLower() == "kyoto")
+		{
+			kyotoSchools.Add(s);
+		}
+		if (s.schoolLocation.city.ToLower() == "fukuoka")
+		{
+			fukuokaSchools.Add(s);
+		}
+		if (s.schoolLocation.city.ToLower() == "sapporo")
+		{
+			sapporoSchools.Add(s);
+		}
+
+
+
+	}
+
+}
+
+
+@{	
+	if (tokyoSchools.Any())
+	{
+		gal = galleries.Where(g => g.id == 6061).FirstOrDefault();
+		img = gal.galleryImages.Where(i => i.tag.ToLower() == "tokyo").FirstOrDefault();
+		title = img.content.Where(c => c.name == "title").FirstOrDefault().contentCollection.FirstOrDefault().body;
+		
+		<div class="feature-bg" style="background-image:url('@img.image');">
+			<div class="trans-black">
+				<div class="container">
+					<div class="row">
+						<div class="bannerText col-xs-12 text-center">
+							<h1>@Html.Raw(title)</h1>
+							@{
+								@tokyoSchools.Count
+								if (tokyoSchools.Count == 1)
+								{
+									@:school
+								}
+								else
+								{
+									@:schools
+								}
+							}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="schoolList">
+			@{
+				foreach (School school in tokyoSchools)
+				{
+					<div class="school" style="background-image:url('@school.videoCover');">
+						<div class="liner">
+							<div class="top">
+								<div class="title">
+									@Html.Raw(school.content.Where(c => c.name == "name").FirstOrDefault().contentCollection.FirstOrDefault().body)
+								</div>
+								<div class="location">
+									<i class="icon icon-map-marker"></i>
+									@Html.Raw(school.schoolLocation.name.ToUpper())
+								</div>
+								<div class="usp">
+									<div class="pendant">
+										<i class="icon icon-star"></i>
+										<i class="icon icon-bookmark"></i>
+									</div>
+									@Html.Raw(school.content.Where(c => c.name == "USP").FirstOrDefault().contentCollection.FirstOrDefault().body)
+								</div>
+							</div>
+							<div class="bot">
+								<a href='/school/@school.schoolLocation.city/@school.url' class="btn btn-transWhite">select</a>
+							</div>
+						</div>
+					</div>
+				}
+								}
+		</div>
+	}
+
+
+	if (osakaSchools.Any())
+	{
+		gal = galleries.Where(g => g.id == 6061).FirstOrDefault();
+								img = gal.galleryImages.Where(i => i.tag.ToLower() == "osaka").FirstOrDefault();
+								title = img.content.Where(c => c.name == "title").FirstOrDefault().contentCollection.FirstOrDefault().body;
+
+		<div class="feature-bg" style="background-image:url('@img.image');">
+			<div class="trans-black">
+				<div class="container">
+					<div class="row">
+						<div class="bannerText col-xs-12 text-center">
+							<h1>@Html.Raw(title)</h1>
+							@{
+								@osakaSchools.Count
+								if (osakaSchools.Count == 1)
+								{
+									@:school
+					}
+								else
+								{
+									@:schools
+					}
+							}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="schoolList">
+			@{
+				foreach (School school in osakaSchools)
+				{
+					<div class="school" style="background-image:url('@school.videoCover');">
+						<div class="liner">
+							<div class="top">
+								<div class="title">
+									@Html.Raw(school.content.Where(c => c.name == "name").FirstOrDefault().contentCollection.FirstOrDefault().body)
+								</div>
+								<div class="location">
+									<i class="icon icon-map-marker"></i>
+									@Html.Raw(school.schoolLocation.name.ToUpper())
+								</div>
+								<div class="usp">
+									<div class="pendant">
+										<i class="icon icon-star"></i>
+										<i class="icon icon-bookmark"></i>
+									</div>
+									@Html.Raw(school.content.Where(c => c.name == "USP").FirstOrDefault().contentCollection.FirstOrDefault().body)
+								</div>
+							</div>
+							<div class="bot">
+								<a href='/school/@school.schoolLocation.city/@school.url' class="btn btn-transWhite">select</a>
+							</div>
+						</div>
+					</div>
+				}
+			}
+		</div>
+				}
+
+
+
+				if (yokohamaSchools.Any())
+				{
+					gal = galleries.Where(g => g.id == 6061).FirstOrDefault();
+					img = gal.galleryImages.Where(i => i.tag.ToLower() == "yokohama").FirstOrDefault();
+					title = img.content.Where(c => c.name == "title").FirstOrDefault().contentCollection.FirstOrDefault().body;
+
+					<div class="feature-bg" style="background-image:url('@img.image');">
+						<div class="trans-black">
+							<div class="container">
+								<div class="row">
+									<div class="bannerText col-xs-12 text-center">
+										<h1>@Html.Raw(title)</h1>
+										@{
+											@yokohamaSchools.Count
+if (yokohamaSchools.Count == 1)
+											{
+												@:school
+								}
+											else
+											{
+												@:schools
+								}
+										}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="schoolList">
+						@{
+							foreach (School school in yokohamaSchools)
+							{
+								<div class="school" style="background-image:url('@school.videoCover');">
+									<div class="liner">
+										<div class="top">
+											<div class="title">
+												@Html.Raw(school.content.Where(c => c.name == "name").FirstOrDefault().contentCollection.FirstOrDefault().body)
+											</div>
+											<div class="location">
+												<i class="icon icon-map-marker"></i>
+												@Html.Raw(school.schoolLocation.name.ToUpper())
+											</div>
+											<div class="usp">
+												<div class="pendant">
+													<i class="icon icon-star"></i>
+													<i class="icon icon-bookmark"></i>
+												</div>
+												@Html.Raw(school.content.Where(c => c.name == "USP").FirstOrDefault().contentCollection.FirstOrDefault().body)
+											</div>
+										</div>
+										<div class="bot">
+											<a href='/school/@school.schoolLocation.city/@school.url' class="btn btn-transWhite">select</a>
+										</div>
+									</div>
+								</div>
+							}
+						}
+					</div>
+							}
+
+
+							if (kyotoSchools.Any())
+							{
+								gal = galleries.Where(g => g.id == 6061).FirstOrDefault();
+								img = gal.galleryImages.Where(i => i.tag.ToLower() == "kyoto").FirstOrDefault();
+								title = img.content.Where(c => c.name == "title").FirstOrDefault().contentCollection.FirstOrDefault().body;
+
+								<div class="feature-bg" style="background-image:url('@img.image');">
+									<div class="trans-black">
+										<div class="container">
+											<div class="row">
+												<div class="bannerText col-xs-12 text-center">
+													<h1>@Html.Raw(title)</h1>
+													@{
+														@kyotoSchools.Count
+if (kyotoSchools.Count == 1)
+														{
+															@:school
+								}
+														else
+														{
+															@:schools
+								}
+													}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="schoolList">
+									@{
+										foreach (School school in kyotoSchools)
+										{
+											<div class="school" style="background-image:url('@school.videoCover');">
+												<div class="liner">
+													<div class="top">
+														<div class="title">
+															@Html.Raw(school.content.Where(c => c.name == "name").FirstOrDefault().contentCollection.FirstOrDefault().body)
+														</div>
+														<div class="location">
+															<i class="icon icon-map-marker"></i>
+															@Html.Raw(school.schoolLocation.name.ToUpper())
+														</div>
+														<div class="usp">
+															<div class="pendant">
+																<i class="icon icon-star"></i>
+																<i class="icon icon-bookmark"></i>
+															</div>
+															@Html.Raw(school.content.Where(c => c.name == "USP").FirstOrDefault().contentCollection.FirstOrDefault().body)
+														</div>
+													</div>
+													<div class="bot">
+														<a href='/school/@school.schoolLocation.city/@school.url' class="btn btn-transWhite">select</a>
+													</div>
+												</div>
+											</div>
+}
+									}
+								</div>
+										}
+
+
+
+
+										if (fukuokaSchools.Any())
+										{
+											gal = galleries.Where(g => g.id == 6061).FirstOrDefault();
+											img = gal.galleryImages.Where(i => i.tag.ToLower() == "fukuoka").FirstOrDefault();
+											title = img.content.Where(c => c.name == "title").FirstOrDefault().contentCollection.FirstOrDefault().body;
+
+											<div class="feature-bg" style="background-image:url('@img.image');">
+												<div class="trans-black">
+													<div class="container">
+														<div class="row">
+															<div class="bannerText col-xs-12 text-center">
+																<h1>@Html.Raw(title)</h1>
+																@{
+																	@fukuokaSchools.Count
+if (fukuokaSchools.Count == 1)
+																	{
+																		@:school
+								}
+																	else
+																	{
+																		@:schools
+								}
+																}
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="schoolList">
+												@{	foreach (School school in fukuokaSchools)
+													{
+														<div class="school" style="background-image:url('@school.videoCover');">
+															<div class="liner">
+																<div class="top">
+																	<div class="title">
+																		@Html.Raw(school.content.Where(c => c.name == "name").FirstOrDefault().contentCollection.FirstOrDefault().body)
+																	</div>
+																	<div class="location">
+																		<i class="icon icon-map-marker"></i>
+																		@Html.Raw(school.schoolLocation.name.ToUpper())
+																	</div>
+																	<div class="usp">
+																		<div class="pendant">
+																			<i class="icon icon-star"></i>
+																			<i class="icon icon-bookmark"></i>
+																		</div>
+																		@Html.Raw(school.content.Where(c => c.name == "USP").FirstOrDefault().contentCollection.FirstOrDefault().body)
+																	</div>
+																</div>
+																<div class="bot">
+																	<a href='/school/@school.schoolLocation.city/@school.url' class="btn btn-transWhite">select</a>
+																</div>
+															</div>
+														</div>
+}
+												}
+											</div>		}
+
+
+
+													if (sapporoSchools.Any())
+													{
+														gal = galleries.Where(g => g.id == 6061).FirstOrDefault();
+														img = gal.galleryImages.Where(i => i.tag.ToLower() == "sapporo").FirstOrDefault();
+														title = img.content.Where(c => c.name == "title").FirstOrDefault().contentCollection.FirstOrDefault().body;
+
+														<div class="feature-bg" style="background-image:url('@img.image');">
+															<div class="trans-black">
+																<div class="container">
+																	<div class="row">
+																		<div class="bannerText col-xs-12 text-center">
+																			<h1>@Html.Raw(title)</h1>
+																			@{
+																				@sapporoSchools.Count
+if (sapporoSchools.Count == 1)
+																				{
+																					@:school
+								}
+																				else
+																				{
+																					@:schools
+								}
+																			}
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="schoolList">
+															@{	foreach (School school in sapporoSchools)
+																{
+																	<div class="school" style="background-image:url('@school.videoCover');">
+																		<div class="liner">
+																			<div class="top">
+																				<div class="title">
+																					@Html.Raw(school.content.Where(c => c.name == "name").FirstOrDefault().contentCollection.FirstOrDefault().body)
+																				</div>
+																				<div class="location">
+																					<i class="icon icon-map-marker"></i>
+																					@Html.Raw(school.schoolLocation.name.ToUpper())
+																				</div>
+																				<div class="usp">
+																					<div class="pendant">
+																						<i class="icon icon-star"></i>
+																						<i class="icon icon-bookmark"></i>
+																					</div>
+																					@Html.Raw(school.content.Where(c => c.name == "USP").FirstOrDefault().contentCollection.FirstOrDefault().body)
+																				</div>
+																			</div>
+																			<div class="bot">
+																				<a href='/school/@school.schoolLocation.city/@school.url' class="btn btn-transWhite">select</a>
+																			</div>
+																		</div>
+																	</div>
+}
+															}
+														</div>		}
+
+
+																////end container
+
+}
+				
+
+
+
+
+

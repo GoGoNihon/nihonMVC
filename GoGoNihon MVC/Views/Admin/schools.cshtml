@@ -1,0 +1,563 @@
+﻿
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 admin-title"><h1>school management</h1></div>
+	</div>
+</div>
+
+
+
+<div class="container">
+	<div class="row">
+
+		@*add new school*@
+
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title">add new school</h3>
+					<div class="icon">
+						<i class="icon icon-plus-circled"></i>
+					</div>
+				</div>
+				<div class="panel-body">
+					<form class="form" method="post" action="/api/createSchool/getSchoolList" data-ajax>
+						<div class="form-group form-group-sm col-xs-12 col-sm-6">
+							<label for="type">school type</label>
+							<select type="text" class="form-control input-sm" name="type">
+								<option value="0">language</option>
+								<option value="1">vocational</option>
+							</select>
+						</div>
+						<div class="form-group col-xs-12  col-sm-6">
+							<label for="name">name</label>
+							<input type="text" class="form-control input-sm" id="name" name="name" placeholder="name" required>
+						</div>
+						<div class="form-group col-xs-12">
+							<label for="name">url (<small>no spaces or special charactors</small>)</label>
+							<input type="text" class="form-control input-sm" id="url" name="url" placeholder="hypened-school-name" required>
+						</div>
+						<div class="form-group col-xs-12 text-center">
+							<button type="submit" class="btn btn-default">create school</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<hr />
+
+
+	<div class="row">
+		<div class="form-group col-xs-12">
+			<div class="input-group">
+				<div class="input-group-addon black"><i class="icon icon-list"></i> select school</div>
+				<select type="text" class="form-control" data-schoolList name="id" id="school-list"></select>
+				<span class="input-group-btn">
+					<button class="btn btn-danger" data-deleteSchool type="button">delete</button>
+				</span>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	@*edit school general*@
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title">edit<span class="label label-default label-xs">general</span></h3>
+					<div class="icon">
+						<i class="icon icon-plus-circled"></i>
+					</div>
+				</div>
+				<div class="panel-body">
+
+					<form class="form" method="post" action="" id="edit-general" data-ajax>
+						<input type="hidden" name="id" />
+						<input type="hidden" name="locationID" />
+						<div class="row">
+							<div class="form-group col-xs-12 col-sm-6">
+								<label for="type">school type</label>
+								<select type="text" class="form-control input-sm" name="type">
+									<option value="0">language</option>
+									<option value="1">vocational</option>
+								</select>
+							</div>
+							<div class="form-group col-xs-12  col-sm-6">
+								<label for="name">name</label>
+								<input type="text" class="form-control input-sm" id="name" name="name" placeholder="name" required>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-group col-xs-12">
+								<label for="name">url (<small>no spaces or special charactors</small>)</label>
+								<input type="text" class="form-control input-sm" id="url" name="url" placeholder="hypened-school-name" required>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-xs-12 col-sm-4">
+								<label>preview video</label>
+								<input type="text" class="form-control input-sm" name="previewVideo" id="previewVideo" placeholder="youtube id ie, 9IV3aEMls2g">
+							</div>
+							<div class="form-group col-xs-12 col-sm-8 video-small">
+								<span class="label label-default label-xs">preview video</span>
+								<div data-preview-video-container class="text-center">
+
+								</div>
+							</div>
+						</div>
+
+
+						<div class="row">
+							<div class="form-group col-xs-12 col-sm-4">
+								<label>mian video</label>
+								<input type="text" class="form-control input-sm" name="video" placeholder="youtube id ie, 9IV3aEMls2g">
+							</div>
+							<div class="form-group col-xs-12 col-sm-8 video-small">
+								<span class="label label-default label-xs">main video</span>
+								<div data-video-container class="text-center"></div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-xs-12 col-sm-4">
+								<label>cover image</label>
+								<input type="file" class="form-control input-sm" name="videoCover" placeholder="video cover image" accept="image/x-png, image/gif, image/jpeg">
+							</div>
+							<div id="generalVideoCoverHolder" class="col-xs-12 image-holder">
+								<span class="label label-default label-xs">cover image</span>
+								<div class="image">
+
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+
+							<div class="form-group col-xs-12 clearfix">
+								<label>address</label>
+								<textarea data-wysiwyg-xs id="address" name="address"></textarea>
+							</div>
+							<div class="form-group col-xs-12 clearfix">
+								<label>google map</label>
+								<input type="text" class="form-control input-sm" name="googleMap" placeholder="paste in google embed code...">
+							</div>
+						</div>
+						<div class="form-group col-xs-12 text-center">
+							<button type="submit" data-editSchoolGeneral class="btn btn-default">save</button>
+						</div>
+
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	@*edit school into and intensity*@
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title">edit<span class="label label-default label-xs">introduction & intensity</span></h3>
+					<div class="icon">
+						<i class="icon icon-plus-circled"></i>
+					</div>
+				</div>
+				<div class="panel-body">
+
+					<form id="edit-school-intro" class="form" method="post" action="" data-ajax>
+
+						<div class="form-group col-xs-12 col-sm-6">
+							<label>introduction image</label>
+							<input type="file" class="form-control input-sm" name="introductionImage" accept="image/x-png, image/gif, image/jpeg">
+						</div>
+						<div id="introImageHolder" class="col-xs-12 col-sm-6 image-holder">
+							<span class="label label-default label-xs">introduction image</span>
+							<div class="image">
+
+							</div>
+						</div>
+						<div class="form-group col-xs-12">
+							<label>introduction</label>
+							<textarea data-wysiwyg name="introduction" id="introduction"></textarea>
+						</div>
+						<div class="form-group col-xs-12">
+							<label>intensity</label>
+							<input type="range" min="1" max="5" step="1" class="form-control input-sm" name="intensity">
+						</div>
+						<div class="form-group col-xs-12 col-sm-6">
+							<label>intensity image</label>
+							<input type="file" class="form-control input-sm" name="intensityImage" accept="image/x-png, image/gif, image/jpeg">
+						</div>
+						<div id="intensityImageHolder" class="col-xs-12 col-sm-6 image-holder">
+							<span class="label label-default label-xs">intensity image</span>
+							<div class="image">
+
+							</div>
+						</div>
+						<div class="form-group col-xs-12 text-center">
+							<button type="submit" class="btn btn-default">save</button>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	@*edit school features *@
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title">edit<span class="label label-default label-xs">school features</span></h3>
+					<div class="icon">
+						<i class="icon icon-plus-circled"></i>
+					</div>
+				</div>
+				<div class="panel-body">
+
+					<form id="edit-school-features" class="form" method="post" action="" data-ajax>
+
+						<div class="form-group col-xs-12 col-sm-6">
+							<label>features image</label>
+							<input type="file" class="form-control input-sm" name="featuresImage" accept="image/x-png, image/gif, image/jpeg">
+						</div>
+						<div id="featuresImageHolder" class="col-xs-12 col-sm-6 image-holder">
+							<span class="label label-default label-xs">features image</span>
+							<div class="image">
+
+							</div>
+						</div>
+						<div class="clearfix"></div>
+						<div class="form-group col-xs-12 col-sm-6">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="features.studentCafe" value="true"> student cafe
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="features.acceptsBeginners" value="true"> accepts beginners
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="features.wifiInCommonAreas" value="true"> wifi in common areas
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="features.studentLounge" value="true"> student lounge
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="features.studentLounge24hour" value="true"> 24hour student lounge
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="features.englishStaff" value="true"> english speaking staff
+								</label>
+							</div>
+						</div>
+
+						<div class="form-group col-xs-12 col-sm-6">
+
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="features.fullTimeJobSupport" value="true"> full-time job support
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="features.partTimeJobSupport" value="true"> part-time job support
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="features.interactWithJapanese" value="true"> interact with japanese
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="features.smallClassSizes" value="true"> small classes
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="features.studentDorms" value="true"> student dorms
+								</label>
+							</div>
+						</div>
+						<div class="form-group col-xs-12">
+							<div class="input-group-addon black">
+								<div class="pendant">
+									<i class="icon icon-star"></i>
+									<i class="icon icon-bookmark"></i>
+								</div>
+								unique feature
+							</div>
+							<input type="text" class="form-control input-sm" name="uniqueFeature" required>
+						</div>
+						@*<div class="form-group col-xs-12">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="features.uniqueFeature" value="true"> has unique feature
+								</label>
+							</div>
+						</div>*@
+						<div class="form-group col-xs-12">
+							<div class="input-group-addon black text"><i class="icon icon-comment"></i>unique feature text</div>
+							<textarea data-wysiwyg-xs name="uniqueFeatureText" id="uniqueFeatureText"></textarea>
+						</div>
+						<div class="form-group col-xs-12 text-center">
+							<button type="submit" class="btn btn-default">save</button>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	@*edit school location *@
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title">edit<span class="label label-default label-xs">school location</span></h3>
+					<div class="icon">
+						<i class="icon icon-plus-circled"></i>
+					</div>
+				</div>
+				<div class="panel-body">
+
+					<form class="form" method="post" action="" id="editSchoolLocation" data-ajax>
+						<div class="row">
+							<div class="form-group col-xs-12 form-inline">
+								<select data-locationSelect class="form-control input-sm" name="locationID"></select>
+								&nbsp; or &nbsp;
+								<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#createLocationModal">add new</button>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-group col-xs-12 col-sm-6">
+								<label>name</label>
+								<input type="text" class="form-control input-sm" name="name" required>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6">
+								<label>image</label>
+								<input type="file" class="form-control input-sm" name="image" accept="image/x-png, image/gif, image/jpeg">
+							</div>
+							<div id="imageHolder" class="col-xs-12 image-holder ">
+								<span class="label label-default label-xs">image</span>
+								<div class="image">
+
+								</div>
+							</div>
+
+							<div class="form-group col-xs-12">
+								<label>description</label>
+								<textarea data-wysiwyg-xs name="description" id="description"></textarea>
+							</div>
+						</div>
+
+
+						<div class="form-group col-xs-12 text-center">
+							<button class="btn btn-danger" data-deleteLocation type="button">delete</button>
+							<button type="submit" class="btn btn-default">save</button>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	@*edit school stations *@
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title">edit<span class="label label-default label-xs">school stations</span></h3>
+					<div class="icon">
+						<i class="icon icon-plus-circled"></i>
+					</div>
+				</div>
+				<div class="panel-body">
+					<form class="form" method="post" action="" id="addSchoolStation" data-ajax>
+
+						<div class="row">
+							<div class="form-group col-xs-12 col-sm-6">
+								<label>name</label>
+								<input type="text" class="form-control input-sm" name="name" required>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6">
+								<label>line</label>
+								<input type="text" class="form-control input-sm" name="line" required>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6">
+								<label>distance</label>
+								<input type="text" class="form-control input-sm" name="distance" required>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6">
+								<label>image</label>
+								<input type="file" class="form-control input-sm" name="image" accept="image/x-png, image/gif, image/jpeg">
+							</div>
+							<div id="imageHolder" class="col-xs-12 image-holder ">
+								<span class="label label-default label-xs">image</span>
+								<div class="image">
+
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group col-xs-12 text-right">
+							<button type="submit" class="btn btn-primary btn-sm">add station</button>
+						</div>
+					</form>
+					<div class="row">
+						<div class="col-xs-12"><hr /></div>
+					</div>
+					<div id="stationListHolder">
+
+					</div>
+					<div class="hidden" id="stationClone">
+						<form class="form" method="post" action="" id="editSchoolStation" data-ajax data-stationForm>
+							<div class="row">
+								<div class="form-group col-xs-12 col-sm-6">
+									<label>name</label>
+									<input type="text" class="form-control input-sm" name="name" required>
+								</div>
+								<div class="form-group col-xs-12 col-sm-6">
+									<label>line</label>
+									<input type="text" class="form-control input-sm" name="line" required>
+								</div>
+								<div class="form-group col-xs-12 col-sm-6">
+									<label>distance</label>
+									<input type="text" class="form-control input-sm" name="distance" required>
+								</div>
+								<div class="form-group col-xs-12 col-sm-6">
+									<label>image</label>
+									<input type="file" class="form-control input-sm" name="image" accept="image/x-png, image/gif, image/jpeg">
+								</div>
+								<div id="imageHolder" class="col-xs-12 image-holder ">
+									<span class="label label-default label-xs">image</span>
+									<div class="image">
+									</div>
+								</div>
+							</div>
+							<div class="form-group col-xs-12 text-right">
+								<button type="submit" data-removeSchoolStation class="btn btn-danger btn-sm">remove</button>
+								<button type="submit" class="btn btn-primary btn-sm">save</button>
+							</div>
+						</form>
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+@*edit school courses *@
+
+<div class="row">
+	<div class="col-xs-12">
+		<div class="panel panel-default">
+			<div class="panel-heading clearfix">
+				<h3 class="panel-title">edit<span class="label label-default label-xs">courses</span></h3>
+				<div class="icon">
+					<i class="icon icon-plus-circled"></i>
+				</div>
+			</div>
+			<div class="panel-body">
+
+				<form id="editCourseGeneral" class="form" method="post" action="" data-ajax>
+
+					<div class="form-group col-xs-12 col-sm-6">
+						<label>courses title</label>
+						<input type="text" class="form-control input-sm" name="coursesHeading">
+					</div>
+					<div class="form-group col-xs-12 col-sm-6">
+						<label>courses image</label>
+						<input type="file" class="form-control input-sm" name="coursesImage">
+					</div>
+					<div class="col-xs-12 image-holder ">
+						<span class="label label-default label-xs">image</span>
+						<div class="image">
+						</div>
+					</div>
+					<div class="form-group col-xs-12 text-center">
+						<button type="submit" class="btn btn-default">save</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+
+<div class="modal fade" id="createLocationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<form method="post" action="" data-ajax id="addLocationForm">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">create new location</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="form-group col-xs-12 col-sm-6">
+							<label>name</label>
+							<input type="text" class="form-control input-sm" name="name" required>
+						</div>
+						<div class="form-group col-xs-12 col-sm-6">
+							<label>city</label>
+							<input type="text" class="form-control input-sm" name="city" required>
+						</div>
+						<div class="form-group col-xs-12">
+							<label>image</label>
+							<input type="file" class="form-control input-sm" name="image" accept="image/x-png, image/gif, image/jpeg">
+						</div>
+						<div class="form-group col-xs-12">
+							<label>description</label>
+							<textarea data-wysiwyg name="description" id="description"></textarea>
+						</div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">close</button>
+					<button type="submit" class="btn btn-primary btn-sm" data-btn-modal-save>save</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+
+
