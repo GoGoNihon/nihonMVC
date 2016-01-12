@@ -213,6 +213,6 @@ GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
 
-
 # web config
 *.config
+*.release.config
